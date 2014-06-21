@@ -17,7 +17,7 @@
     <body>
         <div id="layout" class="content pure-g">
 
-            {{-- Modules::getModuleArea('sidebar') --}}
+            {{ Modules::getModuleArea('sidebar') }}
 
             <div id="main" class="pure-u-1">
                 <div class="email-content">

@@ -5,18 +5,6 @@
  */
 class RedbookRootController extends RedbookBaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
     /**
      * @var string
      */
@@ -41,14 +29,14 @@ class RedbookRootController extends RedbookBaseController {
     {
         try
         {
-            $this->data['Objects'] = $this->_Provider->getDatabaseInformation();
+            $this->data['Database'] = $this->_Provider->getDatabaseInformation();
         }
         catch ( \Predis\Connection\ConnectionException $e )
         {
             $this->data['Alert'] = $e->getMessage();
         }
 
-        $this->layout->content =  View::make( FRONTEND . $this->_ViewDir . '.index', $this->data );
+        $this->layout->content = View::make( FRONTEND . $this->_ViewDir . '.index', $this->data );
     }
 
     /**
@@ -68,7 +56,7 @@ class RedbookRootController extends RedbookBaseController {
     public function readKey( $key )
     {
         $this->data['Object'] = $this->_Provider
-            ->getValueByKeyName($key);
+            ->getValueByKeyName( $key );
 
         $this->layout->content = View::make( FRONTEND . $this->_ViewDir . '.key', $this->data );
     }

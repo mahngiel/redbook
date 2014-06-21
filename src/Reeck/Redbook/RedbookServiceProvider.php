@@ -28,6 +28,7 @@ class RedbookServiceProvider extends ServiceProvider {
 
         // Return the singleton when requested
         $this->app['colophon'] = $this->app->share( function ( $app ) { return \App::make( 'Colophon' ); } );
+        $this->app['modules'] = $this->app->share( function ( $app ) { return \App::make( 'Modules' ); } );
 	}
 
 	/**
@@ -39,6 +40,7 @@ class RedbookServiceProvider extends ServiceProvider {
 	{
 		//
         $this->app->register('\Reeck\Redbook\Support\Providers\ColophonServiceProvider');
+        $this->app->register('\Reeck\Redbook\Support\Providers\ModulesServiceProvider');
 	}
 
 	/**
@@ -48,7 +50,7 @@ class RedbookServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-        return array('redbook', 'colophon');
+        return array('redbook', 'colophon', 'modules');
 	}
 
 }

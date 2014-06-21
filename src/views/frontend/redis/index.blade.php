@@ -2,8 +2,8 @@
     <h3>Redis Databases Dataset</h3>
 </div>
 
-@if( isset($Objects) )
-    @foreach( $Objects as $Key => $Values )
+@if( isset($Database) )
+    @foreach( $Database as $Key => $Values )
         <table class="">
             <thead>
                 <tr class="bg-primary">

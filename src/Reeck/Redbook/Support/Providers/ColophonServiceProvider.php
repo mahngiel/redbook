@@ -3,7 +3,6 @@
 use Reeck\Redbook\Colophon\Colophon;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\App;
  
 class ColophonServiceProvider extends ServiceProvider {
 
@@ -38,7 +37,6 @@ class ColophonServiceProvider extends ServiceProvider {
         });
 
         $this->app->singleton('Colophon', function(){
-
             return new Colophon();
         });
 
