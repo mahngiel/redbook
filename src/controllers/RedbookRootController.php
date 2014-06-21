@@ -35,20 +35,6 @@ class RedbookRootController extends RedbookBaseController {
         $this->layout->content = \View::make( FRONTEND . $this->_ViewDir . '.index', $this->data );
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $database
-     *
-     * @return Response
-     */
-    public function read()
-    {
-        $this->data['Objects'] = $this->_Provider->getAllKeysForDatabase();
-
-        $this->layout->content = View::make( BACKEND . $this->_ViewDir . '.view', $this->data );
-    }
-
     public function readKey( $key )
     {
         try
