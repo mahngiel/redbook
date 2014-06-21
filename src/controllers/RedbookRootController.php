@@ -51,80 +51,54 @@ class RedbookRootController extends RedbookBaseController {
 
     public function readKey( $key )
     {
-        $this->data['Object'] = $this->_Provider
-            ->getValueByKeyName( $key );
-
-        $this->layout->content = \View::make( FRONTEND . $this->_ViewDir . '.key', $this->data );
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Response
-     */
-    public function tasks()
-    {
-        $this->layout->content = View::make( BACKEND . $this->_ViewDir . '.tasks', $this->data );
-    }
-
-    /**
-     *
-     */
-    public function perform()
-    {
-        foreach (Input::get( 'tasks' ) as $actionType => $val)
+        try
         {
-            $this->{$actionType}();
+            $this->data['Object'] = $this->_Provider->getValueByKeyName( $key );
         }
+        catch ( \Reeck\Redbook\Exceptions\RedisKeyException $exception )
+        {
+            $this->data['error'] = $exception->getMessage();
+        }
+
+        $this->layout->content = \View::make( FRONTEND . $this->_ViewDir . '.output', $this->data );
+
+//        if (isset( $this->data['Object'] ))
+//        {
+//            switch ($this->data['Object']['type'])
+//            {
+//                case 'string':
+//                    $this->layout->content->nest( 'definition', FRONTEND . $this->_ViewDir . '.keytypes.string', $this->data );
+//                    break;
+//                case 'set':
+//                case 'list':
+//                    $this->layout->content->nest( 'definition', FRONTEND . $this->_ViewDir . '.keytypes.array', $this->data );
+//                    break;
+//                case 'hash':
+//                    $this->layout->content->nest( 'definition', FRONTEND . $this->_ViewDir . '.keytypes.hash', $this->data );
+//                    break;
+//            }
+//        }
     }
 
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function cleanDownloads()
+    public function readSchema( $schema )
     {
-        // Fetch all keypad stores
-        $downloads = array();
-
-        // Grab all the stores from keypad db
-        foreach ($this->_Provider->findAllStoresForDatabase( 'Metrics' ) as $store)
+        try
         {
-            // grab download types
-            if (preg_match( "/downloads:(\w*)/", $store ))
+            $Objects = array();
+
+            foreach ($this->_Provider->findKeysByPrefix( $schema ) as $key)
             {
-                array_push( $downloads, $store );
+                $Objects[] = generateHtmlSnippet( $this->_Provider->getValueByKeyName( $key ) );
             }
         }
+        catch ( \Reeck\Redbook\Exceptions\RedisKeyException $exception )
+        {
+            $this->data['error'] = $exception->getMessage();
+        }
 
-        // purge them
-        $this->_Provider->Metrics->del( $downloads );
+        $this->data['schema']  = $schema;
+        $this->data['Objects'] = $Objects;
 
-        return Redirect::to( 'redis' )->with( 'message', 'Removed ' . count( $downloads ) . ' download keys' );
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int $id
-     *
-     * @return Response
-     */
-    public function update( $id )
-    {
-        //
-        parent::update( $id );
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     *
-     * @return Response
-     */
-    public function destroy( $id )
-    {
-        //
-        parent::destroy( $id );
+        $this->layout->content = \View::make( FRONTEND . $this->_ViewDir . '.schema', $this->data );
     }
 }
