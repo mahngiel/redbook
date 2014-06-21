@@ -56,7 +56,7 @@ class Index_Module extends Modules {
         $this->data['databases'] = array();
 
         // Grab the list of databases
-        foreach( \Config::get('database.redis') as $databaseName => $databaseConfig )
+        foreach( \Config::get('redbook::database.redis') as $databaseName => $databaseConfig )
         {
             if( is_array($databaseConfig) )
             {
