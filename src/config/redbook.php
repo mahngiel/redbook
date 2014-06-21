@@ -4,6 +4,6 @@
  * Redbook configurations
  */
 return array (
-        'routeIndex' => 'redbook',
+        'routeIndex' => '/redbook',
         'schemaSeparator' => ':',
     );
