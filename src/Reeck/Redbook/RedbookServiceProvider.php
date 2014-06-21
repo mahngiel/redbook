@@ -22,6 +22,7 @@ class RedbookServiceProvider extends ServiceProvider {
 
         // load helper functions
         require_once __DIR__ . '/Support/Helpers.php';
+        require_once __DIR__ . '/Support/Macros.php';
 
         // include routes
         include __DIR__ . '/../../routes.php';
