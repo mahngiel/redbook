@@ -1613,6 +1613,8 @@ body {
 #redbook-header {
   height: 3em;
   /* 32px */
+  border-bottom: 1px solid #000;
+  z-index: 30;
 }
 /**
  * -- LAYOUT STYLES --
@@ -1647,6 +1649,7 @@ body {
     width: 11.25em;
     /* 180 / 16 */
     background-color: #323a45;
+    z-index: 20;
     /*
          * YUI Overrides
          */
@@ -1663,6 +1666,7 @@ body {
     /* 320px */
     background-color: #f8f8f8;
     overflow-x: auto;
+    z-index: 10;
   }
   #redbook-schema #redbook-schema-tree {
     font-size: 0.75em;
@@ -1689,8 +1693,35 @@ body {
   }
   #redbook-main {
     left: 31.625em;
+    right: 0;
     overflow: auto;
     width: auto;
     /* so that it's not 100% */
   }
+  #redbook-main #page #page-title {
+    border-bottom: 1px solid #000;
+  }
+  #redbook-main #page #page-title h3 {
+    margin: 0;
+    line-height: 200%;
+  }
+}
+/**
+ * Redbook Console
+ */
+#redbook-console {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+#redbook-console #console-handler {
+  height: 2em;
+  border-top: 1px solid #000;
+  background-color: #e5e5e5;
+}
+#redbook-console #console-handler i.fa {
+  height: 2em;
+  width: 2em;
+  text-align: center;
+  line-height: 2em;
 }
