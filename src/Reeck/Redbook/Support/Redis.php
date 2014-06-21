@@ -1,7 +1,7 @@
 <?php namespace Reeck\Redbook\Support;
 
 use Illuminate\Redis\Database;
-use Illuminate\Support\Facades\Config;
+use Reeck\Redbook\Exceptions\RedisSchemaException;
 
 /**
  * @method exists() Predis\Command\KeyExists
@@ -179,7 +179,7 @@ abstract class Redis extends \Illuminate\Redis\Database {
     {
         if (!isset( $this->schema[$schema] ))
         {
-            throw new \RedisSchemaException( "The requested Schema \"$schema\" does not exist." );
+            throw new RedisSchemaException( "The requested Schema \"$schema\" does not exist." );
         }
 
         // Operate on single keyed schemas

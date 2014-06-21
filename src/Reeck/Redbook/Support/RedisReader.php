@@ -1,5 +1,8 @@
 <?php namespace Reeck\Redbook\Support;
 
+use Reeck\Redbook\Exceptions\RedisKeyException;
+use Reeck\Redbook\Exceptions\RedisSchemaException;
+
 /**
  * Class RedisReader
  *
@@ -78,6 +81,27 @@ class RedisReader extends Redis {
     }
 
     /**
+     * @param $prefix
+     *
+     * @return array
+     */
+    public function findKeysByPrefix( $prefix )
+    {
+        $data = array();
+
+        // read through each key
+        foreach ($this->keys( "{$prefix}*" ) as $key)
+        {
+            // store the key type
+            $data[] = $key;
+        }
+
+        natcasesort( $data );
+
+        return $data;
+    }
+
+    /**
      * @param $keyName
      *
      * @return mixed
@@ -87,7 +111,7 @@ class RedisReader extends Redis {
     {
         if (!$this->exists( $keyName ))
         {
-            throw new \Exception( 'Key not found' );
+            throw new RedisKeyException( "Requested key \"{$keyName}\" not found" );
         }
 
         $data['name']  = $keyName;
@@ -112,14 +136,16 @@ class RedisReader extends Redis {
                 $var = $this->get( $key );
                 break;
             case 'hash':
-                $var = json_encode( $this->hgetall( $key ) );
+                $var = $this->hgetall( $key );
                 break;
             case 'set':
-                $var = implode( ', ', $this->smembers( $key ) );
+                $var = $this->smembers( $key );
                 break;
             case 'list':
-                $count = $this->llen( $key );
-                $var   = implode( ', ', $this->lrange( $key, 0, ( $count - 1 ) ) );
+                $var = $this->lrange( $key, 0, -1 );
+                break;
+            case 'zset':
+                $var = $this->zrange( $key, 0, -1, 'withscores' );
         }
 
         return $var;
