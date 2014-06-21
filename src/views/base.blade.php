@@ -39,7 +39,7 @@
 
                     {{-- Console --}}
                     <div class="pure-u-1">
-                        <div id="redbook-console"></div>
+                        {{ Modules::getModule('console') }}
                     </div>
 
                 </div>
