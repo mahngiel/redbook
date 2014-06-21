@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/* Master Colors */
+/* Typography */
+/* Standard Text & Links */
 /*!
  *  Font Awesome 4.0.1
  *  the iconic font designed for Bootstrap
@@ -1600,16 +1603,94 @@ ul li a,
 ol li a {
   display: block;
 }
-li:hover {
-  background-color: #fafafa;
-}
-li:focus {
-  color: blue;
-}
-li ul,
-li ol {
-  padding-left: 8px;
-}
 .foldable li {
   border-bottom: 1px solid #c0bfbf;
+}
+html,
+body {
+  font-family: 'Droid Sans', sans-serif;
+}
+#redbook-header {
+  height: 3em;
+  /* 32px */
+}
+/**
+ * -- LAYOUT STYLES --
+ * This layout consists of three main elements,
+ *  `#redbook-nav` (navigation bar),
+ *  `#redbook-schema` (email list), and
+ *  `#redbook-main` (email content). All 3 elements are within `#redbook`
+ */
+#redbook,
+#redbook-nav,
+#redbook-schema,
+#redbook-main {
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 75em) {
+  /* Context: 1200px */
+  /**
+     * Database & Schema columns
+     */
+  #redbook-nav,
+  #redbook-schema,
+  #redbook-main {
+    position: fixed;
+    top: 3em;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: auto;
+  }
+  #redbook-nav {
+    width: 11.25em;
+    /* 180 / 16 */
+    background-color: #323a45;
+    /*
+         * YUI Overrides
+         */
+  }
+  #redbook-nav .pure-menu.pure-menu-open {
+    border: none !important;
+    background-color: inherit !important;
+  }
+  #redbook-schema {
+    margin-left: 11.25em;
+    padding: 0 0.1875em;
+    /* 3 / 16 */
+    width: 20em;
+    /* 320px */
+    background-color: #f8f8f8;
+    overflow-x: auto;
+  }
+  #redbook-schema #redbook-schema-tree {
+    font-size: 0.75em;
+    /* 12 / 16 */
+    font-family: 'Source Code Pro', Monaco, Consolas, "Lucida Console", monospace;
+    font-weight: 400;
+    line-height: 1.5em;
+  }
+  #redbook-schema #redbook-schema-tree li.schema-key:hover {
+    background-color: #dddddd DD;
+  }
+  #redbook-schema #redbook-schema-tree li a {
+    color: #444444;
+    text-decoration: none;
+    display: block;
+  }
+  #redbook-schema #redbook-schema-tree li a:hover {
+    color: #2b2b2b;
+    font-weight: 700;
+  }
+  #redbook-schema #redbook-schema-tree li ul,
+  #redbook-schema #redbook-schema-tree li ol {
+    padding-left: 8px;
+  }
+  #redbook-main {
+    left: 31.625em;
+    overflow: auto;
+    width: auto;
+    /* so that it's not 100% */
+  }
 }
