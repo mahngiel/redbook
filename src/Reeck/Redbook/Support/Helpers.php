@@ -1149,13 +1149,13 @@ function makeRedisSchemaTree( array $tree, $newRound = true, $oldWord = null )
     {
         if (is_array( $ele ))
         {
-            $out .= '<li class=""><i class="entypo entypo-folder"></i> '.$k;
+            $out .= '<li class=""><i class="fa fa-folder-o"></i> '.$k;
             $out .= '<ul class="">' . makeRedisSchemaTree( $tree[$k], false, $oldWord.$k ) . '</ul>';
             $out .= '</li>';
         }
         else
         {
-            $out .= '<li class="key" data-key="'.$oldWord.$ele.'"><i class="entypo entypo-key"></i> '.$oldWord.$ele;
+            $out .= '<li class="key" data-key="'.$oldWord.$ele.'"><i class="fa fa-key"></i> '.$oldWord.$ele;
         }
     }
 
