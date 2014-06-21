@@ -1,4 +1,4 @@
-var navTarget = $( '#pageTarget' ), navLink = null;
+var navRoot = $( '#root' ), navTarget = $( '#page' ), navLink = null;
 
 /* Enabled refreshing w/o losing your page */
 if ( $.cookie( 'last-page' ) && document.location.href !== $.cookie( 'last-page' ) ) {
@@ -6,43 +6,43 @@ if ( $.cookie( 'last-page' ) && document.location.href !== $.cookie( 'last-page'
 }
 
 $( d ).ajaxStart( function () {
-    //navTarget.prepend( pageWait );
+    navTarget.prepend( pageWait );
 } );
 $( d ).ajaxError( function () {
-    //$('#loading' ).remove();
+    pageWait.remove();
 } );
 $( d ).ajaxComplete( function () {
     pageWait.remove();
     prepDOM();
 } );
 
+// Monitor the URI
+window.addEventListener( "popstate", function ( e ) {
+    // auto ajax on browser history change
+    navTarget.load( location.pathname );
+} );
+
 /* ------------------------------------ GENERIC AJAX LINK ------------------------------------------- */
 $( d ).on( 'click', 'a.ajaxLink', function ( event ) {
 
-    // defer if ajax off
-    if( !Redbook.ajax ) {
-        return;
-    }
-
     event.preventDefault();
 
-    navTarget.prepend( pageWait );
+    navRoot.prepend( pageWait );
 
     navLink = $( this );
 
     navTarget.load( navLink.prop( 'href' ) );
+
     history.pushState( null, null, navLink.prop( 'href' ) );
 } );
 
+/* --------------------------------- GENERIC AJAX FLYIN LINK ---------------------------------------- */
 $( d ).on( 'click', 'a.ajaxFlyIn', function ( event ) {
     event.preventDefault();
 
-    navTarget.prepend( pageWait );
+    navRoot.prepend( pageWait );
 
-    var fly = $( '<div/>', { id: 'flyIn'} )
-        .load( $( this ).prop( 'href' ) )
-        .prependTo( navTarget )
-        .effect( 'fadeIn', 'slow' );
+    var fly = $( '<div/>', { id: 'flyIn'} ).load( $( this ).prop( 'href' ) ).prependTo( navTarget ).effect( 'fadeIn', 'slow' );
 } );
 
 /* -------------------------------- OBJECT REQUEST OPERATIONS --------------------------------------- */
@@ -88,28 +88,23 @@ $( d ).on( 'click', '.submit', function ( event ) {
         dataType  : 'json',
         beforeSend: function () {
             navTarget.prepend( pageWait );
-            $( '.help-block' ).text( '' );
+            $( '.input-callback' ).text( '' );
+            $( '.form-group' ).attr( 'class', 'form-group' );
         },
         complete  : function () {
-            $( '#dialog' ).dialog( 'destroy' );
         },
         success   : function ( json ) {
             createNotification( json.level, json.message );
             if ( !json.status ) {
                 if ( json.validation ) {
                     $.each( json.validation, function ( index, item ) {
-                        $( '#f' + index.capitalize() ).siblings( '.help-block' ).addClass('alert-danger').text( item );
+                        $( '#f' + index.capitalize() ).closest( '.form-group' ).addClass( 'has-error' ).find( '.input-callback' ).addClass( 'text-danger' ).text( item );
                     } );
                 }
             }
             else {
-                if ( Redbook.ajax ) {
-                    navTarget.load( json.redirect );
-                    history.pushState( null, null, json.redirect );
-                }
-                else {
-                    location = json.redirect;
-                }
+                navTarget.load( json.redirect );
+                history.pushState( null, null, json.redirect );
             }
         }
     } );
@@ -138,7 +133,7 @@ $( d ).on( 'click', 'a.ajaxDelete', function ( event ) {
             type      : 'post',
             dataType  : 'json',
             beforeSend: function () {
-                $( '.help-block' ).text( '' );
+                $( '.input-callback' ).text( '' );
             },
             complete  : function () {
                 $( '#dialog' ).dialog( 'destroy' );
@@ -148,13 +143,13 @@ $( d ).on( 'click', 'a.ajaxDelete', function ( event ) {
                 if ( !json.status ) {
                     if ( json.validation ) {
                         $.each( json.validation, function ( index, item ) {
-                            $( '#f' + index.capitalize() ).siblings( '.help-block' ).text( item );
+                            $( '#f' + index.capitalize() ).siblings( '.input-callback' ).text( item );
                         } );
                     }
                 }
                 else {
                     if ( json.redirect ) {
-                        if ( Redbook.ajax_load ) {
+                        if ( DeviceVault.ajax_load ) {
                             navTarget.load( json.redirect );
                             history.pushState( null, null, json.redirect );
                         }
@@ -188,15 +183,35 @@ $( d ).on( 'click', 'a.ajaxToggle', function ( event ) {
         complete  : function () {},
         success   : function ( json ) {
             createNotification( json.level, json.message );
+
             if ( json.status ) {
-                navLink.find( 'span' ).toggleClass( 'disabled' );
+
+                /** Check for toggleAttr */
+                if ( json.toggleAttr ) {
+                    /** Change toggle val if present */
+                    if ( json.toggleAttr.value ) {
+                        navLink.attr( 'data-toggle', json.toggleAttr.value );
+                    }
+
+                    /** Change icon if present */
+                    if ( json.toggleAttr.class ) {
+                        navLink.find( '.entypo' ).prop( 'class', json.toggleAttr.class );
+                    }
+
+                    /** Change title if present */
+                    if ( json.toggleAttr.title ) {
+                        navLink.closest( '.toggleParent' ).attr( 'title', json.toggleAttr.title );
+                    }
+                }
             }
+
             if ( json.redirect ) {
                 navTarget.load( json.redirect );
             }
         }
     } );
 } );
+
 
 /* ----------------------------------- FORM INPUT AGGREGATE ----------------------------------------- */
 function getFormInputs( form ) {
