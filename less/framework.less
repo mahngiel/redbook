@@ -1,149 +1,92 @@
-
-#wrap{
-    height     : auto;
-    min-height : 100%;
-    margin     : 0 auto -3em;
-    padding    : 0 0 3em;
+#redbook-header{
+    height : 3em; /* 32px */
 }
 
-#mainFooter{
-    height     : 3em;
-    line-height: 3em;
-    border-top : 1px solid @brand-primary;
-    color      : @brand-secondary;
+/**
+ * -- LAYOUT STYLES --
+ * This layout consists of three main elements,
+ *  `#redbook-nav` (navigation bar),
+ *  `#redbook-schema` (email list), and
+ *  `#redbook-main` (email content). All 3 elements are within `#redbook`
+ */
+#redbook, #redbook-nav, #redbook-schema, #redbook-main{
+    margin  : 0;
+    padding : 0;
+}
+#redbook{
 }
 
-#header{
-    position         : fixed;
-    z-index          : 50;
-    width            : 100%;
-    color            : @colorGamma;
-    background-color : @colorAlpha;
+@media (min-width : 75em){
+    /* Context: 1200px */
+    /**
+     * Database & Schema columns
+     */
+    #redbook-nav, #redbook-schema, #redbook-main{
+        position   : fixed;
+        top        : 3em;
+        bottom     : 0;
+        overflow-x : hidden;
+        overflow-y : auto;
+        width      : auto;
+    }
 
-    #identity{
-        background-color : darken(@colorAlpha, 10%);
-        padding          : 0;
-
-        .entypo, .glyphicon{
-            padding      : 1em 0;
-            text-align   : center;
-            border-right : 1px solid @colorBeta;
-            width        : 3em;
-            margin-right : 0.625em;
+    #redbook-nav{
+        width            : 11.25em; /* 180 / 16 */
+        background-color : @navigationColorBackground;
+        /*
+         * YUI Overrides
+         */
+        .pure-menu.pure-menu-open{
+            border           : none !important;
+            background-color : inherit !important;
         }
     }
 
-    #userNav{
-        height     : 2.75em;
-        z-index    : 4;
-        color      : @colorGamma;
-        text-align : right;
+    #redbook-schema{
+        margin-left      : 11.25em;
+        padding          : 0 0.1875em; /* 3 / 16 */
+        width            : 20em; /* 320px */
+        background-color : @schemaColorBackground;
+        overflow-x       : auto;
 
-        a{
-            color : @colorGamma;
-        }
-    }
-}
+        #redbook-schema-tree{
+            font-size   : 0.75em; /* 12 / 16 */
+            font-family : 'Source Code Pro', Monaco, Consolas, "Lucida Console", monospace;
+            font-weight : 400;
+            line-height : 1.5em;
 
-#root{
-    padding-top : 3em;
-}
-
-#siderail{
-    display          : block;
-    background-color : @colorAlpha;
-    z-index          : 2;
-    padding          : 0;
-    overflow         : hidden;
-
-    ul#railLinks{
-        padding  : 0; /* 5 / 16 */
-        overflow : hidden;
-
-        li{
-            cursor       : pointer;
-            border-style : solid;
-            border-width : 1px 0 0;
-            border-color : @colorBeta;
-            line-height  : 3em;
-
-            a{
-                color : @colorGamma;
-
-                span{
-                    display : inline-block;
+            li{
+                &.schema-key:hover {
+                    background-color: @schemaColorKeyHover;
                 }
-
-                .glyphicon, .entypo{
-                    padding      : 1em 0;
-                    text-align   : center;
-                    border-right : 1px solid @colorBeta;
-                    width        : 3em;
-                    margin-right : 0.625em;
-                }
-
-                .railNavText{
-                    //text-indent: 0.675em;
-                }
-                &.active, &:hover{
-                    background-color : @colorBeta;
-
-                    .glyphicon, .entypo{
-                        border-color : @colorAlpha;
+                a{
+                    color           : @schemaColorLink;
+                    text-decoration : none;
+                    display         : block;
+                    &:hover{
+                        color       : @schemaColorLinkHover;
+                        font-weight : 700;
                     }
+                    &:active{ }
+                }
+                &:hover{
+                    //                    background-color : #fafafa;
+                }
+                &:focus{
+                    //                    color : blue;
+                }
+
+                ul, ol{
+                    padding-left : 8px;
                 }
             }
-            &:last-child{
-                border-bottom-width : 1px;
-            }
 
         }
     }
 
-}
-
-#page{
-    background : none repeat scroll 0 0 @defaultColorBackground;
-    height     : 100%;
-    margin     : 0;
-
-    &:before{
-        border-left : 1px solid @colorAlpha;
-        content     : "";
-        height      : 100%;
-        left        : -1px;
-        position    : absolute;
-        top         : 0;
-        width       : 1px;
-        z-index     : 1;
-    }
-
-    #page-title{
-        line-height      : 3.125em;
-        height           : 3.125em;
-        border-bottom    : 1px solid @colorAlpha;
-        background-color : @colorZeta;
-        padding          : 0 2em;
-
-        h1, h2, h3, h4, h5{
-            margin      : 0;
-            line-height : 150%;
-        }
-    }
-
-    #page-content{
-        padding : 1.5em;
-    }
-}
-
-#flyIn{
-    position         : absolute;
-    height           : 100%;
-    width            : 100%;
-    z-index          : 1;
-    background-color : #ccc;
-
-    &:after{
-        .clearfix;
+    #redbook-main{
+        left     : 31.625em;
+        overflow : auto;
+        width    : auto; /* so that it's not 100% */
     }
 }
