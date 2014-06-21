@@ -4,9 +4,9 @@
 
 @if( isset($Database) )
     @foreach( $Database as $Key => $Values )
-        <table class="">
+        <table class="pure-table pure-table-bordered">
             <thead>
-                <tr class="bg-primary">
+                <tr>
                     <td colspan="2" class="aleft bold">{{ $Key }}</td>
                 </tr>
             </thead>

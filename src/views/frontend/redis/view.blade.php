@@ -2,7 +2,7 @@
     <h3>Redis Keystores</h3>
 </div>
 
-<table class="table table-bordered table-condensed table-hover small">
+<table class="pure-table pure-table-bordered">
     <thead>
         <tr class="bg-primary">
             <th>Key Name (type)</th>
