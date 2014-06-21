@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A layout example that shows off a responsive email layout.">
 
-        <title>Email &ndash; Layout Examples &ndash; Pure</title>
+        <title>Redbook Redis Schema Viewer</title>
         <script type="text/javascript">
             Redbook = [];
             Redbook.base_url = '<?php echo Request::getSchemeAndHttpHost() .'/'. REDBOOK_URI ?>';

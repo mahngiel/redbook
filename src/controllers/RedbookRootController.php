@@ -1,8 +1,5 @@
 <?php
 
-/**
- * Class HomeController
- */
 class RedbookRootController extends RedbookBaseController {
 
     /**
@@ -16,7 +13,6 @@ class RedbookRootController extends RedbookBaseController {
     public function __construct( \Reeck\Redbook\Support\RedisReader $Provider )
     {
         parent::__construct();
-
         $this->_Provider = $Provider;
     }
 
@@ -29,6 +25,8 @@ class RedbookRootController extends RedbookBaseController {
     {
         try
         {
+
+
             $this->data['Database'] = $this->_Provider->getDatabaseInformation();
         }
         catch ( \Predis\Connection\ConnectionException $e )
@@ -36,7 +34,7 @@ class RedbookRootController extends RedbookBaseController {
             $this->data['Alert'] = $e->getMessage();
         }
 
-        $this->layout->content = View::make( FRONTEND . $this->_ViewDir . '.index', $this->data );
+        $this->layout->content = \View::make( FRONTEND . $this->_ViewDir . '.index', $this->data );
     }
 
     /**
@@ -64,7 +62,7 @@ class RedbookRootController extends RedbookBaseController {
     /**
      * Show the form for editing the specified resource.
      *
-     * @return Response
+     * @return \Response
      */
     public function tasks()
     {

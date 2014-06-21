@@ -26,8 +26,15 @@ class RedbookServiceProvider extends ServiceProvider {
         // include routes
         include __DIR__ . '/../../routes.php';
 
+        // Change database if req'd
+        if ( \Input::has( 'database' ))
+        {
+            \Session::set( 'activeDatabase', \Input::get( 'database' ) );
+        }
+
         // Return the singleton when requested
         $this->app['colophon'] = $this->app->share( function ( $app ) { return \App::make( 'Colophon' ); } );
+
         $this->app['modules'] = $this->app->share( function ( $app ) { return \App::make( 'Modules' ); } );
 	}
 

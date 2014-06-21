@@ -69,7 +69,7 @@ class Index_Module extends Modules {
 
         $RedisReader = new RedisReader( $this->data['activeDatabase']);
 
-        $this->data['Objects'] = mapRedisSchema($RedisReader->findAllStoresForDatabase());
+        $this->data['Objects'] = mapRedisSchema($RedisReader->findAllStoresForDatabase(), \Config::get('redbook::redbook.schemaSeparator'));
 
 //        debug($this->data['Objects']);
 

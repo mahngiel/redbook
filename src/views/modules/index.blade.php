@@ -4,7 +4,7 @@
             <ul>
                 <li class="pure-menu-heading">Databases</li>
                 @foreach( $databases as $databaseOption )
-                    <li><a href="#"><i class="fa fa-database"></i>{{ $databaseOption }}</a></li>
+                    <li><a href="{{ REDBOOK_URI . '?database='. $databaseOption }}"><i class="fa fa-database"></i> {{ $databaseOption }}</a></li>
                 @endforeach
             </ul>
         </div>

@@ -14,7 +14,7 @@ class RedisReader extends Redis {
     {
         parent::__construct();
 
-        $this->database = $database ? : 'redbook';
+        $this->database = $database ? : \Session::get( 'activeDatabase', 'default' );
     }
 
     /**
