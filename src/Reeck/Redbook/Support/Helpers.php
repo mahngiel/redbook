@@ -1140,26 +1140,26 @@ function makeRedisSchemaTree( array $tree, $newRound = true, $oldWord = null )
 {
     $out = '';
 
-    if( $oldWord )
+    if ($oldWord)
     {
-        $oldWord .= ':';
+        $oldWord .= \Config::get( 'redbook::redbook.schemaSeparator' );
     }
 
     foreach ($tree as $k => $ele)
     {
         if (is_array( $ele ))
         {
-            $out .= '<li class=""><i class="fa fa-folder-o"></i> '.$k;
-            $out .= '<ul class="">' . makeRedisSchemaTree( $tree[$k], false, $oldWord.$k ) . '</ul>';
+            $out .= '<li class=""><a href="' . REDBOOK_URI . 'schema/' . $k . '"><i class="fa fa-folder-o"></i> ' . $k . '</a>';
+            $out .= '<ul class="schema-container">' . makeRedisSchemaTree( $tree[$k], false, $oldWord . $k ) . '</ul>';
             $out .= '</li>';
         }
         else
         {
-            $out .= '<li class="key" data-key="'.$oldWord.$ele.'"><i class="fa fa-key"></i> '.$oldWord.$ele;
+            $out .= '<li class="schema-key"><a data-schema="key" data-key="' . $oldWord . $ele . '" href="' . REDBOOK_URI . 'key/' . $oldWord . $ele . '"><i class="fa fa-key"></i> ' . $oldWord . $ele . '</a>';
         }
     }
 
-    return $out . '</li>' ;
+    return $out . '</li>';
 }
 
 /**

@@ -15,53 +15,39 @@
         {{ Colophon::getStylesheets() }}
     </head>
     <body>
-        <div id="layout" class="content pure-g">
+        <div id="redbook-header">
+            <div id="redbook-identity"><a href="{{ REDBOOK_URI }}">{{ Colophon::getAppName() }}</a></div>
+        </div>
+        <div id="redbook" class="pure-g">
 
-            {{ Modules::getModuleArea('sidebar') }}
+            {{-- Sidebars --}}
+            <div class="pure-u-2-5 pure-u-md-1-3">
+                {{ Modules::getModuleArea('sidebar') }}
+            </div>
 
-            <div id="main" class="pure-u-1">
-                <div class="email-content">
-                    <div class="email-content-header pure-g">
-                        <div class="pure-u-1-2">
-                            <h1 class="email-content-title">Hello from Toronto</h1>
+            {{-- Main Content --}}
+            <div id="redbook-main" class="pure-u-3-5 pure-u-md-2-3">
 
-                            <p class="email-content-subtitle">
-                                From <a>Tilo Mitra</a> at <span>3:56pm, April 3, 2012</span>
-                            </p>
-                        </div>
+                <div class="pure-g">
 
-                        <div class="email-content-controls pure-u-1-2">
-                            <button class="secondary-button pure-button">Reply</button>
-                            <button class="secondary-button pure-button">Forward</button>
-                            <button class="secondary-button pure-button">Move to</button>
+                    {{-- Content --}}
+                    <div class="pure-u-1">
+                        <div id="page">
+                            {{ isset($content) ? $content : '' }}
                         </div>
                     </div>
 
-                </div>
-                <div class="row">
-                    <div class="twelve columns">
-                        {{ isset($content) ? $content : '' }}
+                    {{-- Console --}}
+                    <div class="pure-u-1">
+                        <div id="redbook-console"></div>
                     </div>
+
                 </div>
+
             </div>
         </div>
         @section('footer_scripts')
             {{ Colophon::getFooterScripts() }}
-            <script>
-                YUI().use( 'node-base', 'node-event-delegate', function ( Y ) {
-                    // This just makes sure that the href="#" attached to the <a> elements
-                    // don't scroll you back up the page.
-                    Y.one( 'body' ).delegate( 'click', function ( e ) {
-                        e.preventDefault();
-                    }, 'a[href="#"]' );
-                } );
-
-                YUI().use('node-load', function(Y){
-                    Y.all('.key' ).on('click', function(){
-                        console.log( )
-                    });
-                });
-            </script>
         @show
     </body>
 </html>

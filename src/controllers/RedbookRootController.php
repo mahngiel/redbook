@@ -25,8 +25,6 @@ class RedbookRootController extends RedbookBaseController {
     {
         try
         {
-
-
             $this->data['Database'] = $this->_Provider->getDatabaseInformation();
         }
         catch ( \Predis\Connection\ConnectionException $e )
@@ -56,7 +54,7 @@ class RedbookRootController extends RedbookBaseController {
         $this->data['Object'] = $this->_Provider
             ->getValueByKeyName( $key );
 
-        $this->layout->content = View::make( FRONTEND . $this->_ViewDir . '.key', $this->data );
+        $this->layout->content = \View::make( FRONTEND . $this->_ViewDir . '.key', $this->data );
     }
 
     /**

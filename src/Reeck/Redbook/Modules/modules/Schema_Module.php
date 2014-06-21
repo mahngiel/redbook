@@ -3,9 +3,9 @@
 use Reeck\Redbook\Modules\Modules;
 use Reeck\Redbook\Support\RedisReader;
 
-class Index_Module extends Modules {
+class Schema_Module extends Modules {
 
-    public $name = 'Index';
+    public $name = 'Schema';
     public $description = 'Maintains the keys within the redis database';
     public $author = 'Redbook Development';
     public $link = 'http://redbook.io';
@@ -53,26 +53,10 @@ class Index_Module extends Modules {
 
     public function run()
     {
-        $this->data['databases'] = array();
-
-        // Grab the list of databases
-        foreach( \Config::get('redbook::database.redis') as $databaseName => $databaseConfig )
-        {
-            if( is_array($databaseConfig) )
-            {
-                $this->data['databases'][] = $databaseName;
-            }
-        }
-
-        // Set active database
-        $this->data['activeDatabase'] = \Session::get('activeDatabase', 'default');
-
-        $RedisReader = new RedisReader( $this->data['activeDatabase']);
+        $RedisReader = new RedisReader( \Session::get( 'activeDatabase', 'default' ) );
 
         $this->data['Objects'] = mapRedisSchema($RedisReader->findAllStoresForDatabase(), \Config::get('redbook::redbook.schemaSeparator'));
 
-//        debug($this->data['Objects']);
-
-        parent::rawContainer( MODULE . 'index', $this->data );
+        parent::rawContainer( MODULE . 'schema', $this->data );
     }
 }
