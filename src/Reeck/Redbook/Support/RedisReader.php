@@ -90,7 +90,7 @@ class RedisReader extends Redis {
         $data = array();
 
         // read through each key
-        foreach ($this->keys( "{$prefix}*" ) as $key)
+        foreach ($this->keys( "{$prefix}:*" ) as $key)
         {
             // store the key type
             $data[] = $key;
