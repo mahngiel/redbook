@@ -1,4 +1,4 @@
-<div id="nav" class="pure-u">
+<div id="redbook-nav" class="pure-u">
     <div class="nav-inner">
         <div class="pure-menu pure-menu-open">
             <ul>
@@ -10,6 +10,7 @@
         </div>
     </div>
 </div>
-<div id="list" class="pure-u-1">
+
+<div id="redbook-schema" class="pure-u-1">
     {{ makeRedisSchemaTree( $Objects ) }}
 </div>
