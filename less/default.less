@@ -1,0 +1,34 @@
+ul, ol{
+    list-style : none;
+    margin     : 0 !important;
+
+
+    li{
+        padding-left : 8px;
+        cursor: pointer;
+
+
+        a{
+            display : block;
+        }
+    }
+}
+
+li{
+    &:hover{
+        background-color : #fafafa;
+    }
+    &:focus{
+        color: blue;
+    }
+
+    ul, ol{
+        padding-left : 8px;
+    }
+}
+
+.foldable{
+    li{
+        border-bottom : 1px solid #c0bfbf;
+    }
+}

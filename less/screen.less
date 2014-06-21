@@ -1,0 +1,86 @@
+/* Handheld size */
+@media only screen and (max-width : 480px){
+    /* Style adjustments for viewports 480px and under go here */
+    .hidden-phone{
+        display    : none !important;
+        visibility : hidden !important;
+    }
+    #siderail{
+        display    : none !important;
+        visibility : hidden !important;
+    }
+    #root{
+        margin-left : 0 !important;
+    }
+}
+/*/mediaquery*/
+
+/* Handheld and larger */
+@media only screen and (min-width : 480px){
+    /* Style adjustments for viewports 480px and over go here */
+
+}
+/*/mediaquery*/
+
+/* Smaller than tablet */
+@media all and (max-width : 768px){
+    body{
+        font-size : 14px;
+    }
+    .hidden-tablet{
+        display    : none !important;
+        visibility : hidden !important;
+    }
+
+}
+/*/mediaquery*/
+
+/* Tablet and larger */
+@media only screen and (min-width : 768px){
+    /* Style adjustments for viewports 768px and over go here */
+}
+/*/mediaquery*/
+
+
+/* Tablet to 1000 */
+@media all and (min-width : 768px) and (max-width : 1000px){
+
+    body{ font-size : 14px; }
+
+    .hidden-tablet{
+        display    : none !important;
+        visibility : hidden !important;
+    }
+
+    #siderail{
+        width : 3em;
+    }
+}
+/*/mediaquery*/
+
+
+/* Less than scale */
+/* 1000 to 1210 */
+@media all and (min-width : 1000px) and (max-width : 1210px){
+
+    ul#railLinks li a{
+        span.glyphicon, span.entypo{
+            display : none !important;
+        }
+        padding : 0 0.625em;
+    }
+}
+/*/mediaquery*/
+
+@media all and (max-width : 1210px){
+
+    body{ font-size : 14px; }
+
+}
+/*/mediaquery*/
+
+/* Full scale */
+@media all and (min-width : 1211px){
+
+}
+/*/mediaquery*/

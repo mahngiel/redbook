@@ -1,0 +1,149 @@
+
+#wrap{
+    height     : auto;
+    min-height : 100%;
+    margin     : 0 auto -3em;
+    padding    : 0 0 3em;
+}
+
+#mainFooter{
+    height     : 3em;
+    line-height: 3em;
+    border-top : 1px solid @brand-primary;
+    color      : @brand-secondary;
+}
+
+#header{
+    position         : fixed;
+    z-index          : 50;
+    width            : 100%;
+    color            : @colorGamma;
+    background-color : @colorAlpha;
+
+    #identity{
+        background-color : darken(@colorAlpha, 10%);
+        padding          : 0;
+
+        .entypo, .glyphicon{
+            padding      : 1em 0;
+            text-align   : center;
+            border-right : 1px solid @colorBeta;
+            width        : 3em;
+            margin-right : 0.625em;
+        }
+    }
+
+    #userNav{
+        height     : 2.75em;
+        z-index    : 4;
+        color      : @colorGamma;
+        text-align : right;
+
+        a{
+            color : @colorGamma;
+        }
+    }
+}
+
+#root{
+    padding-top : 3em;
+}
+
+#siderail{
+    display          : block;
+    background-color : @colorAlpha;
+    z-index          : 2;
+    padding          : 0;
+    overflow         : hidden;
+
+    ul#railLinks{
+        padding  : 0; /* 5 / 16 */
+        overflow : hidden;
+
+        li{
+            cursor       : pointer;
+            border-style : solid;
+            border-width : 1px 0 0;
+            border-color : @colorBeta;
+            line-height  : 3em;
+
+            a{
+                color : @colorGamma;
+
+                span{
+                    display : inline-block;
+                }
+
+                .glyphicon, .entypo{
+                    padding      : 1em 0;
+                    text-align   : center;
+                    border-right : 1px solid @colorBeta;
+                    width        : 3em;
+                    margin-right : 0.625em;
+                }
+
+                .railNavText{
+                    //text-indent: 0.675em;
+                }
+                &.active, &:hover{
+                    background-color : @colorBeta;
+
+                    .glyphicon, .entypo{
+                        border-color : @colorAlpha;
+                    }
+                }
+            }
+            &:last-child{
+                border-bottom-width : 1px;
+            }
+
+        }
+    }
+
+}
+
+#page{
+    background : none repeat scroll 0 0 @defaultColorBackground;
+    height     : 100%;
+    margin     : 0;
+
+    &:before{
+        border-left : 1px solid @colorAlpha;
+        content     : "";
+        height      : 100%;
+        left        : -1px;
+        position    : absolute;
+        top         : 0;
+        width       : 1px;
+        z-index     : 1;
+    }
+
+    #page-title{
+        line-height      : 3.125em;
+        height           : 3.125em;
+        border-bottom    : 1px solid @colorAlpha;
+        background-color : @colorZeta;
+        padding          : 0 2em;
+
+        h1, h2, h3, h4, h5{
+            margin      : 0;
+            line-height : 150%;
+        }
+    }
+
+    #page-content{
+        padding : 1.5em;
+    }
+}
+
+#flyIn{
+    position         : absolute;
+    height           : 100%;
+    width            : 100%;
+    z-index          : 1;
+    background-color : #ccc;
+
+    &:after{
+        .clearfix;
+    }
+}

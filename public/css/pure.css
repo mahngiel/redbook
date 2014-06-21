@@ -1,0 +1,471 @@
+body{
+    background-color : #ffffff;
+}
+
+/* from PURE buttons-core.css */
+.pure-skin-mine .pure-button{
+    /* Structure */
+    display             : inline-block;
+    *display            : inline; /*IE 6/7*/
+    zoom                : 1;
+    line-height         : normal;
+    white-space         : nowrap;
+    vertical-align      : baseline;
+    text-align          : center;
+    cursor              : pointer;
+    -webkit-user-drag   : none;
+    -webkit-user-select : none;
+    -moz-user-select    : none;
+    -ms-user-select     : none;
+    user-select         : none;
+}
+
+/* Firefox: Get rid of the inner focus border */
+.pure-skin-mine .pure-button::-moz-focus-inner{
+    padding : 0;
+    border  : 0;
+}
+/* end from PURE buttons-core.css */
+/* from PURE buttons.css */
+/*csslint unqualified-attributes:false*/
+
+.pure-skin-mine .pure-button{
+    font-size              : 100%;
+    *font-size             : 90%; /*IE 6/7 - To reduce IE's oversized button text*/
+    *overflow              : visible; /*IE 6/7 - Because of IE's overly large left/right padding on buttons */
+    padding                : 0.9em 1.5em 0.9em;
+    color                  : #030303; /* rgba not supported (IE 8) */
+    /* color: rgba(0, 0, 0, 0.80); rgba supported */
+    /* *color: #444; IE 6 & 7 */
+    border                 : 1px solid #c0bfbf; /*IE 6/7/8*/
+    border                 : none rgba(0, 0, 0, 0); /*IE9 + everything else*/
+    background-color       : #cfcece;
+    text-decoration        : none;
+    border-radius          : 1px;
+    -webkit-font-smoothing : antialiased;
+    /* Transitions */
+    -webkit-transition     : 0.1s linear -webkit-box-shadow;
+    -moz-transition        : 0.1s linear -moz-box-shadow;
+    -ms-transition         : 0.1s linear box-shadow;
+    -o-transition          : 0.1s linear box-shadow;
+    transition             : 0.1s linear box-shadow;
+}
+
+.pure-skin-mine .pure-button-hover,
+.pure-skin-mine .pure-button:hover{
+    filter           : progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#00000000', GradientType=0);
+    background-image : -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0, 0, 0, 0.05)), to(rgba(0, 0, 0, 0.05)));
+    background-image : -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));
+    background-image : -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05));
+    background-image : -ms-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));
+    background-image : -o-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.05));
+    background-image : linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.05));
+}
+
+.pure-skin-mine .pure-button:focus{
+    outline : 0;
+}
+.pure-skin-mine .pure-button-active,
+.pure-skin-mine .pure-button:active{
+    box-shadow : 0 0 0 1px rgba(0, 0, 0, 0.15) inset, 0 0 6px rgba(0, 0, 0, 0.20) inset;
+}
+
+.pure-skin-mine .pure-button[disabled],
+.pure-skin-mine .pure-button-disabled,
+.pure-skin-mine .pure-button-disabled:hover,
+.pure-skin-mine .pure-button-disabled:active{
+    border           : none;
+    background-image : none;
+    filter           : progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    filter           : alpha(opacity=40);
+    -khtml-opacity   : 0.40;
+    -moz-opacity     : 0.40;
+    opacity          : 0.40;
+    cursor           : not-allowed;
+    box-shadow       : none;
+}
+
+.pure-skin-mine .pure-button-hidden{
+    display : none;
+}
+
+/* Firefox: Get rid of the inner focus border */
+.pure-skin-mine .pure-button::-moz-focus-inner{
+    padding : 0;
+    border  : 0;
+}
+
+.pure-skin-mine .pure-button-primary,
+.pure-skin-mine .pure-button-selected,
+.pure-skin-mine a.pure-button-primary,
+.pure-skin-mine a.pure-button-selected{
+    background-color : #F9311A;
+    color            : #fffbfa;
+}
+
+/* foundational CSS */
+.pure-skin-mine .pure-table{
+    /* Remove spacing between table cells (from Normalize.css) */
+    border-collapse : collapse;
+    border-spacing  : 0;
+    empty-cells     : show;
+    border          : 1px solid #e6e6e6;
+}
+
+.pure-skin-mine .pure-table caption{
+    color      : #9e9e9e;
+    font       : italic 85%/1 arial, sans-serif;
+    padding    : 1em 0;
+    text-align : center;
+}
+
+.pure-skin-mine .pure-table td,
+.pure-skin-mine .pure-table th{
+    border-left  : 1px solid #e6e6e6; /* inner column border */
+    border-width : 0 0 0 1px;
+    font-size    : inherit;
+    margin       : 0;
+    overflow     : visible; /*to make ths where the title is really long work*/
+    padding      : 0.54em 0.6em; /* cell padding */
+}
+
+.pure-skin-mine .pure-table td:first-child,
+.pure-skin-mine .pure-table th:first-child{
+    border-left-width : 0;
+}
+
+.pure-skin-mine .pure-table thead{
+    background-color : #dedede;
+    color            : #0f0f0f;
+    text-align       : left;
+    vertical-align   : bottom;
+}
+
+/*
+striping:
+   even - #fff (white)
+   odd  - #f2f2f2 (light gray)
+*/
+.pure-skin-mine .pure-table td{
+    background-color : #f5f5f5;
+    color            : #262626;
+}
+.pure-skin-mine .pure-table-odd td{
+    background-color : #e6e6e6;
+    color            : #0f0f0f;
+}
+
+/* nth-child selector for modern browsers */
+.pure-skin-mine .pure-table-striped tr:nth-child(2n-1) td{
+    background-color : #e6e6e6;
+    color            : #0f0f0f;
+}
+
+/* BORDERED TABLES */
+.pure-skin-mine .pure-table-bordered td{
+    border-bottom : 1px solid #e6e6e6;
+}
+.pure-skin-mine .pure-table-bordered tbody > tr:last-child td,
+.pure-skin-mine .pure-table-horizontal tbody > tr:last-child td{
+    border-bottom-width : 0;
+}
+
+/* HORIZONTAL BORDERED TABLES */
+.pure-skin-mine .pure-table-horizontal td,
+.pure-skin-mine .pure-table-horizontal th{
+    border-width  : 0 0 1px 0;
+    border-bottom : 1px solid #e6e6e6;
+}
+.pure-skin-mine .pure-table-horizontal tbody > tr:last-child td{
+    border-bottom-width : 0;
+}
+
+/* from PURE menu-core.css */
+/*csslint adjoining-classes:false, outline-none:false*/
+/*TODO: Remove this lint rule override after a refactor of this code.*/
+
+.pure-skin-mine .pure-menu ul{
+    position   : absolute;
+    visibility : hidden;
+}
+
+.pure-skin-mine .pure-menu.pure-menu-open{
+    visibility : visible;
+    z-index    : 2;
+    width      : 100%;
+}
+
+.pure-skin-mine .pure-menu ul{
+    left       : -10000px;
+    list-style : none;
+    margin     : 0;
+    padding    : 0;
+    top        : -10000px;
+    z-index    : 1;
+}
+
+.pure-skin-mine .pure-menu > ul{ position : relative; }
+
+.pure-skin-mine .pure-menu-open > ul{
+    left       : 0;
+    top        : 0;
+    visibility : visible;
+}
+
+.pure-skin-mine .pure-menu-open > ul:focus{
+    outline : 0;
+}
+
+.pure-skin-mine .pure-menu li{
+    position : relative;
+}
+
+.pure-skin-mine .pure-menu a, .pure-skin-mine .pure-menu .pure-menu-heading{
+    display         : block;
+    color           : inherit;
+    line-height     : 1.5em;
+    padding         : 0.63em 1.4em;
+    text-decoration : none;
+    white-space     : nowrap;
+}
+
+.pure-skin-mine .pure-menu.pure-menu-horizontal > .pure-menu-heading{
+    display        : inline-block;
+    *display       : inline;
+    zoom           : 1;
+    margin         : 0;
+    vertical-align : middle;
+}
+.pure-skin-mine .pure-menu.pure-menu-horizontal > ul{
+    display        : inline-block;
+    *display       : inline;
+    zoom           : 1;
+    vertical-align : middle;
+    /* height: 2.4em; removed for Skin Builder */
+}
+
+.pure-skin-mine .pure-menu li a{ padding : 0.63em 1.4em; }
+
+.pure-skin-mine .pure-menu-can-have-children > .pure-menu-label:after{
+    content      : '\25B8';
+    float        : right;
+    font-family  : 'Lucida Grande', 'Lucida Sans Unicode', 'DejaVu Sans', sans-serif; /* These specific fonts have the Unicode char we need. */
+    margin-right : -20px;
+    margin-top   : -1px;
+}
+
+.pure-skin-mine .pure-menu-can-have-children > .pure-menu-label{
+    padding-right : 30px;
+}
+
+.pure-skin-mine .pure-menu-separator{
+    background-color : #e6e6e6;
+    display          : block;
+    height           : 1px;
+    font-size        : 0;
+    margin           : 7px 2px;
+    overflow         : hidden;
+}
+
+.pure-skin-mine .pure-menu-hidden{
+    display : none;
+}
+
+/* FIXED MENU */
+.pure-skin-mine .pure-menu-fixed{
+    position : fixed;
+    top      : 0;
+    left     : 0;
+    width    : 100%;
+}
+
+/* HORIZONTAL MENU CODE */
+
+/* Initial menus should be inline-block so that they are horizontal */
+.pure-skin-mine .pure-menu-horizontal li{
+    display        : inline-block;
+    *display       : inline;
+    zoom           : 1;
+    vertical-align : middle;
+}
+
+/* Submenus should still be display:block; */
+.pure-skin-mine .pure-menu-horizontal li li{
+    display : block;
+}
+
+/* Content after should be down arrow */
+.pure-skin-mine .pure-menu-horizontal > .pure-menu-children > .pure-menu-can-have-children > .pure-menu-label:after{
+    content : "\25BE";
+}
+/*Add extra padding to elements that have the arrow so that the hover looks nice */
+.pure-skin-mine .pure-menu-horizontal > .pure-menu-children > .pure-menu-can-have-children > .pure-menu-label{
+    padding-right : 30px;
+}
+
+/* Adjusting separator for vertical menus */
+.pure-skin-mine .pure-menu-horizontal li.pure-menu-separator{
+    height : 50%;
+    width  : 1px;
+    margin : 0 7px;
+}
+
+/* Submenus should be horizontal separator again */
+.pure-skin-mine .pure-menu-horizontal li li.pure-menu-separator{
+    height : 1px;
+    width  : auto;
+    margin : 7px 2px;
+}
+
+/* end from yuicss/menu-core.css *******************************************/
+/* from yuicss menu-paginator.css */
+/*csslint box-model:false*/
+/*TODO: Remove this lint rule override after a refactor of this code.*/
+
+.pure-skin-mine .pure-paginator{
+    /* `pure-g` Grid styles */
+    letter-spacing  : -0.31em; /* Webkit: collapse white-space between units */
+    *letter-spacing : normal; /* reset IE < 8 */
+    *word-spacing   : -0.43em; /* IE < 8: collapse white-space between units */
+    text-rendering  : optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
+    /* `pure-paginator` Specific styles */
+    list-style      : none;
+    margin          : 0;
+    padding         : 0;
+}
+.opera-only :-o-prefocus,
+.pure-skin-mine .pure-paginator{
+    word-spacing : -0.43em;
+}
+
+/* `pure-u` Grid styles */
+.pure-skin-mine .pure-paginator li{
+    display        : inline-block;
+    *display       : inline; /* IE < 8: fake inline-block */
+    zoom           : 1;
+    letter-spacing : normal;
+    word-spacing   : normal;
+    vertical-align : top;
+    text-rendering : auto;
+}
+.pure-skin-mine .pure-paginator .pure-button{
+    border-radius  : 0;
+    padding        : 0.8em 1.4em;
+    vertical-align : top;
+    height         : 1.1em;
+}
+.pure-skin-mine .pure-paginator .pure-button:focus,
+.pure-skin-mine .pure-paginator .pure-button:active{
+    outline-style : none;
+}
+.pure-skin-mine .pure-paginator .prev,
+.pure-skin-mine .pure-paginator .next{
+    /*color: #C0C1C3; allow .pure-button to color text*/
+}
+.pure-skin-mine .pure-paginator .prev{
+    border-radius : 2px 0px 0px 2px;
+}
+.pure-skin-mine .pure-paginator .next{
+    border-radius : 0px 2px 2px 0px;
+}
+/* end from PURE menu-paginator.css ******************************/
+/* from PURE menu.css *******************************************/
+/* MAIN MENU STYLING */
+/*csslint adjoining-classes:false*/
+/*TODO: Remove this lint rule override after a refactor of this code.*/
+
+.pure-skin-mine .pure-menu.pure-menu-open,
+.pure-skin-mine .pure-menu.pure-menu-horizontal li .pure-menu-children{
+    background : #f5f5f5; /* Old browsers */
+    border     : 1px solid #e6e6e6;
+}
+
+/* remove borders for horizontal menus */
+.pure-skin-mine .pure-menu.pure-menu-horizontal,
+.pure-skin-mine .pure-menu.pure-menu-horizontal .pure-menu-heading{
+    border : none;
+}
+
+/* LINK STYLES */
+
+.pure-skin-mine .pure-menu a{
+    border       : 1px solid transparent;
+    border-left  : none;
+    border-right : none;
+}
+
+.pure-skin-mine .pure-menu a,
+.pure-skin-mine .pure-menu .pure-menu-can-have-children > li:after{
+    color : #262626;
+}
+
+.pure-skin-mine .pure-menu .pure-menu-can-have-children > li:hover:after{
+    color : #0f0f0f;
+}
+
+/* Focus style for a dropdown menu-item when the parent has been opened */
+.pure-skin-mine .pure-menu .pure-menu-open{
+    background : #dedede;
+}
+
+.pure-skin-mine .pure-menu li a:hover,
+.pure-skin-mine .pure-menu li a:focus{
+    background : #dedede;
+}
+
+/* DISABLED STATES */
+.pure-skin-mine .pure-menu li.pure-menu-disabled a:hover,
+.pure-skin-mine .pure-menu li.pure-menu-disabled a:focus{
+    background : #f5f5f5;
+    color      : #969696;
+}
+
+.pure-skin-mine .pure-menu .pure-menu-disabled > a{
+    background-image : none;
+    border-color     : transparent;
+    cursor           : default;
+}
+
+.pure-skin-mine .pure-menu .pure-menu-disabled > a,
+.pure-skin-mine .pure-menu .pure-menu-can-have-children.pure-menu-disabled > a:after{
+    color : #969696;
+}
+
+/* HEADINGS */
+.pure-skin-mine .pure-menu .pure-menu-heading{
+    color          : #030303;
+    text-transform : uppercase;
+    font-size      : 90%;
+    margin-top     : 0.5em;
+    border-bottom  : solid 1px #e6e6e6;
+}
+
+/* SELECTED MENU ITEM */
+.pure-skin-mine .pure-menu li.pure-menu-selected a{
+    background-color : #F9311A;
+    color            : #fffbfa;
+}
+
+/* FIXED MENU */
+.pure-skin-mine .pure-menu.pure-menu-open.pure-menu-fixed{
+    border        : none;
+    border-bottom : 1px solid #e6e6e6;
+}
+/* end from PURE menu.css ***********************************/
+/* from PURE menu-responsive.css ****************************/
+/* RESPONSIVE */
+
+@media (max-width : 480px){
+
+    .pure-skin-mine .pure-menu-horizontal{
+        width : 100%;
+    }
+
+    .pure-skin-mine .pure-menu-children li{
+        display       : block;
+        border-bottom : 1px solid #e6e6e6;
+    }
+
+}
+/* end from menu-responsive.css ******************/
+

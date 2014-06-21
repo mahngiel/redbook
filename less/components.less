@@ -1,0 +1,160 @@
+// Image upload container
+#ajaxImageUpload{
+    border           : 1px solid #ccc;
+    min-height       : 115px;
+    padding          : 15px;
+    background-color : #fff;
+}
+
+#filedrag{
+    font-weight      : bold;
+    text-align       : center;
+    padding          : 1em 0;
+    margin           : 1em 0;
+    color            : #555;
+    border           : 1px dashed @colorAlpha;
+    background-color : @colorZeta;
+    cursor           : default;
+}
+
+#filedrag.hover{
+    color        : #f00;
+    border-color : #f00;
+    border-style : solid;
+    box-shadow   : inset 0 3px 4px #888;
+}
+
+// Main Containers
+.wonderBox{
+    border  : 1px solid;
+    padding : 0;
+
+    .boxList{
+        padding          : 0;
+        background-color : @colorGamma;
+        border-right     : 1px solid @colorAlpha;
+
+        ul{
+            li{
+                width : 100% !important;
+
+                a{
+                    background-color : inherit;
+                    border-radius    : 0;
+                    padding          : 0.75em 1em;
+                }
+            }
+        }
+    }
+
+    .boxPane{
+        padding          : 0;
+        border-left      : 1px solid @colorAlpha;
+        background-color : @colorOmega;
+
+        .header{
+            background-color : @colorAlpha;
+            color            : @colorGamma;
+            line-height      : 2em;
+
+            .actionItems{
+                float : right;
+
+                .actionItem{
+                    display     : inline-block;
+                    border-left : 1px solid @colorBeta;
+                    height      : 2em;
+                    width       : 2em;
+                    text-align  : center;
+                    cursor      : pointer;
+
+                    a{
+                        color : @colorGamma;
+                        span{
+                            &.disabled{
+                                color : @colorBeta;
+                            }
+                        }
+                    }
+
+                }
+            }
+
+        }
+    }
+}
+
+.panel{
+    .panel-heading{
+        font-size   : 1.25em; /* 16 x 1.25 = 20 */
+        height      : 40px;
+        padding     : 0;
+        overflow    : hidden;
+        line-height : 40px;
+
+        .panel-title{
+            display     : block;
+            line-height : 40px;
+            float       : left;
+            margin-left : 1em;
+        }
+
+        .action-set-left, .action-set-right{
+
+            i, span{
+                border-style : solid;
+                border-width : 0 1px;
+                display      : block;
+                padding      : 0.5em 0;
+                text-align   : center;
+                width        : 3em;
+                opacity      : 0.8;
+                float        : left;
+                cursor       : default;
+            }
+
+        }
+        .action-set-left{
+            float : left;
+
+            i, span{
+                border-left-color  : lighten(@panel-default-border, 20%);
+                border-right-color : @panel-default-border;
+
+                &:first-child{
+                    border-left-width : 0;
+                }
+            }
+        }
+        .action-set-right{
+            float : right;
+
+            i, span{
+                border-right-color : lighten(@panel-default-border, 20%);
+                border-left-color  : @panel-default-border;
+
+                &:last-child{
+                    border-right-width : 0;
+                }
+            }
+        }
+
+        .label, .badge{
+            vertical-align : middle;
+        }
+    }
+}
+
+.nav, .tabs{
+    li.active a, li:focus a{
+        background-color: @colorOmega;
+    }
+}
+
+.tab-content{
+    border-style: solid;
+    border-width: 0 1px 1px;
+    border-color: #ddd;
+    background-color : @colorOmega;
+    padding: 0.675em;
+}

@@ -1,0 +1,1 @@
+@charset "UTF-8";ul,ol{list-style:none;margin:0 !important}ul li,ol li{padding-left:8px;cursor:pointer}ul li a,ol li a{display:block}li:hover{background-color:#fafafa}li:focus{color:#00f}li ul,li ol{padding-left:8px}.foldable li{border-bottom:1px solid #c0bfbf}
