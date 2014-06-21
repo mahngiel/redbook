@@ -371,7 +371,7 @@ class Modules {
             $path     = implode( '.', $parts );
         }
 
-        echo View::make( MODULE . 'drawer' )->nest( 'tray', $path, $data );
+        echo \View::make( MODULE . 'drawer' )->nest( 'tray', $path, $data );
     }
 
     /**
