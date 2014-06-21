@@ -152,7 +152,6 @@ class Colophon {
         $this->footerScripts = array(
             'jQuery'         => '//code.jquery.com/jquery-2.1.0.min.js',
             'jQuery_cookie'  => 'js/libs/jquery.cookie.js',
-            'Yui'            => '//yui.yahooapis.com/3.14.1/build/yui/yui.js',
             'App_global'     => 'js/global.js',
             'App_navigation' => 'js/navigation.js',
         );
@@ -165,9 +164,9 @@ class Colophon {
     {
         $this->stylesheets = array(
             'App_Pure'   => array( 'href' => 'css/pure.css' ),
+            'UI_Pure'    => array( 'href' => 'http://yui.yahooapis.com/pure/0.5.0/pure-min.css' ),
             'pure_email' => array( 'href' => 'css/email.css' ),
             'App_custom' => array( 'href' => 'css/styles.css' ),
-            'UI_Pure'    => array( 'href' => 'http://yui.yahooapis.com/pure/0.4.2/pure-min.css' ),
         );
     }
 
