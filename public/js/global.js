@@ -166,7 +166,6 @@ String.prototype.capitalize = function () {
 WebFontConfig = {
     google: { families: [ 'Droid+Sans::latin', 'Oswald:400,300:latin', 'Source+Code+Pro:400,700:latin' ] }
 };
-
 (function () {
     var wf = document.createElement( 'script' );
     wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
@@ -175,3 +174,12 @@ WebFontConfig = {
     var s = document.getElementsByTagName( 'script' )[0];
     s.parentNode.insertBefore( wf, s );
 })();
+
+(function ( $ ) {
+    $( '.schema-container' ).hide();
+
+})( jQuery );
+$( d ).on( 'click', 'a.schema-collapse', function ( e ) {
+    e.preventDefault();
+    $( this ).siblings( '.schema-container' ).slideToggle();
+} );
