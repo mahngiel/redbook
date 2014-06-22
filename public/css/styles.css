@@ -1775,6 +1775,8 @@ ol li a {
 #page #page-title {
   background-color: #136687;
   color: #f3f3f3;
+  height: 2.5em;
+  line-height: 2.5em;
 }
 #page #page-title > div {
   display: inline-block;
@@ -1786,10 +1788,13 @@ ol li a {
   border-right: 1px solid #000;
   padding: 0 0.5em;
 }
-#page #page-title #key-name {
+#page #page-title #key-name,
+#page #page-title h3 {
   padding: 0 0.5em;
+  margin: 0;
 }
-#page #page-title #key-name i {
+#page #page-title #key-name i,
+#page #page-title h3 i {
   color: #353d47;
 }
 #page #page-title #key-options {
