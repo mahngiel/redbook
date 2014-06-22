@@ -47,7 +47,17 @@ class RedbookRootController extends RedbookBaseController {
             $this->data['error'] = $exception->getMessage();
         }
 
-        $this->layout->content = \View::make( FRONTEND . $this->_ViewDir . '.output', $this->data );
+
+        $View = \View::make( FRONTEND . $this->_ViewDir . '.output', $this->data );
+
+        if( Request::ajax() )
+        {
+            return $View;
+        }
+        else
+        {
+            $this->layout->content = $View;
+        }
 
 //        if (isset( $this->data['Object'] ))
 //        {
