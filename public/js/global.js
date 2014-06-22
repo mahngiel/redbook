@@ -124,7 +124,7 @@ function uriSegment( segment ) {
 
 // ---------------------------------- PLUGIN REGISTRATION ------------------------------------------ //
 /* Set the cookie if not exist */
-if ( !$.cookie( Redbook.name ) ) { $.cookie( Redbook.name, Redbook.name ); }
+if ( !$.cookie( Redbook.name ) ) { $.cookie( Redbook.name, true, { expires: 7, path: '/' } ); }
 
 /* Standard HTTP request to generate DOM handlers */
 $( d ).ready( prepDOM() );
@@ -178,4 +178,36 @@ WebFontConfig = {
 $( d ).on( 'click', 'a.schema-collapse', function ( e ) {
     e.preventDefault();
     $( this ).siblings( '.schema-container' ).slideToggle();
+} );
+
+/**
+ * Generate a modal upon command
+ */
+$( d ).on( 'click', '.launchModal', function ( event ) {
+    event.preventDefault();
+
+    var token = $.token( 6, false );
+
+    newModal( token );
+
+    $( '#' + token ).modal( { remote: $( this ).attr( 'href' ) } );
+
+} );
+
+/**
+ * Append modal to DOM
+ *
+ * @param id
+ */
+function newModal( id ) {
+    $( 'body' ).append( $( '<div class="modal fade" id="' + id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog modal-lg"> <div class="modal-content"><img src="' + Redbook.asset_url + '/img/preloader.gif" /> Loading</div> </div> </div>' ) );
+}
+
+/**
+ * Dismiss the modal
+ */
+$( d ).on( 'click', 'button[data-dismiss="modal"]', function () {
+    $( this ).closest( '.modal' ).remove();
+    $( '.modal-backdrop' ).remove();
+    $( 'body' ).toggleClass( 'modal-open' );
 } );

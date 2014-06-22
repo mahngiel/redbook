@@ -123,7 +123,11 @@ $( d ).on( 'click', 'a.ajaxDelete', function ( event ) {
             method: 'POST',
             action: navLink.prop( 'href' ),
             id    : 'delForm'
-        } ).append( '<input type="hidden" name="_method" value="DELETE"/>' ).append( '<input type="hidden" name="item_id" value="' + navLink.closest( '.owner' ).attr( 'data-id' ).replace( /\D/g, '' ) + '"/>' ) );
+        } )
+            .append( '<input type="hidden" name="_method" value="DELETE"/>' )
+            .append( '<input type="hidden" name="keyName" value="' + navLink.closest( '#key-options' ).attr( 'data-key' ) + '"/>' )
+            .append( '<input type="hidden" name="database" value="' + navLink.closest( '#key-options' ).attr( 'data-database' ) + '"/>' )
+        );
 
         form = $( '#delForm' );
 
@@ -132,33 +136,19 @@ $( d ).on( 'click', 'a.ajaxDelete', function ( event ) {
             data      : getFormInputs( form ),
             type      : 'post',
             dataType  : 'json',
-            beforeSend: function () {
-                $( '.input-callback' ).text( '' );
-            },
+            beforeSend: function () { },
             complete  : function () {
-                $( '#dialog' ).dialog( 'destroy' );
+                form.remove();
             },
             success   : function ( json ) {
                 createNotification( json.level, json.message );
                 if ( !json.status ) {
-                    if ( json.validation ) {
-                        $.each( json.validation, function ( index, item ) {
-                            $( '#f' + index.capitalize() ).siblings( '.input-callback' ).text( item );
-                        } );
-                    }
                 }
                 else {
                     if ( json.redirect ) {
-                        if ( DeviceVault.ajax_load ) {
-                            navTarget.load( json.redirect );
-                            history.pushState( null, null, json.redirect );
-                        }
-                        else {
-                            location = json.redirect;
-                        }
-                    }
-                    else {
-                        navLink.closest( '.owner' ).fadeOut( 250, function () { $( this ).remove(); } );
+//                        navTarget.load( json.redirect );
+//                        history.pushState( null, null, json.redirect );
+                        location.replace( json.redirect );
                     }
                 }
             }
@@ -237,7 +227,7 @@ $( d ).on( 'click', 'a.ajaxSchemaKey', function ( event ) {
 
     navLink = $( this );
 
-    $('#page').load( navLink.prop( 'href' ) );
+    $( '#page' ).load( navLink.prop( 'href' ) );
 
     history.pushState( null, null, navLink.prop( 'href' ) );
 } );

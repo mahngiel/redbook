@@ -117,6 +117,7 @@ class RedisReader extends Redis {
         $data['name']  = $keyName;
         $data['type']  = $this->type( $keyName );
         $data['value'] = $this->unpackKeyType( $data['type'], $keyName );
+        $data['ttl']   = $this->ttl( $keyName );
 
         return $data;
     }
@@ -159,18 +160,25 @@ class RedisReader extends Redis {
         return $this->dbsize();
     }
 
+    /**
+     * @param $command
+     *
+     * @return mixed
+     * @throws \RedisException
+     */
     public function fire( $command )
     {
         // chunk and trim
-        $commandArgs = array_map(function($arg){ return trim($arg); }, explode(' ', $command));
+        $commandArgs = array_map( function ( $arg ) { return trim( $arg ); }, explode( ' ', $command ) );
 
-        if( empty($commandArgs) ) {
-            throw new \RedisException('No command issued');
+        if (empty( $commandArgs ))
+        {
+            throw new \RedisException( 'No command issued' );
         }
 
-        $command = array_shift($commandArgs);
+        $command = array_shift( $commandArgs );
 
-        switch( count($commandArgs) )
+        switch (count( $commandArgs ))
         {
             case 0:
                 $r = $this->{$command}();

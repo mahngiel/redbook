@@ -1813,3 +1813,7 @@ ol li a {
   background-color: #f3f3f3;
   color: #1ea8de;
 }
+#page #definition {
+  padding: 1em;
+  background-color: #c0bfbf;
+}

@@ -36,29 +36,6 @@ class RedbookRootController extends RedbookBaseController {
         $this->layout->content = \View::make( FRONTEND . $this->_ViewDir . '.index', $this->data );
     }
 
-    public function readKey( $key )
-    {
-        try
-        {
-            $this->data['Object'] = $this->_Provider->getValueByKeyName( $key );
-
-            $View = \View::make( FRONTEND . $this->_ViewDir . ".types.{$this->data['Object']['type']}", $this->data );
-        }
-        catch ( \Reeck\Redbook\Exceptions\RedisKeyException $exception )
-        {
-            $View = \View::make( FRONTEND . $this->_ViewDir . '.error', array('error'=>$exception->getMessage()));
-        }
-
-        if (Request::ajax())
-        {
-            return $View;
-        }
-        else
-        {
-            $this->layout->content = $View;
-        }
-    }
-
     public function readSchema( $schema )
     {
         try
