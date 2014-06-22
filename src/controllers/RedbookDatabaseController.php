@@ -1,6 +1,6 @@
 <?php
 
-use Reeck\Redbook\Support\RedisReader;
+use Mahngiel\Redbook\Support\RedisReader;
 
 /**
  * Class RedbookDatabaseController
@@ -10,7 +10,7 @@ class RedbookDatabaseController extends RedbookBaseController {
     /**
      * @param Reeck\\Redbook\Support\RedisReader $Provider
      */
-    public function __construct( \Reeck\Redbook\Support\RedisReader $Provider )
+    public function __construct( \Mahngiel\Redbook\Support\RedisReader $Provider )
     {
         parent::__construct();
 
@@ -70,7 +70,7 @@ class RedbookDatabaseController extends RedbookBaseController {
 
             $View = \View::make( PACKAGE . "types.{$this->data['Object']['type']}", $this->data );
         }
-        catch ( \Reeck\Redbook\Exceptions\RedisKeyException $exception )
+        catch ( \Mahngiel\Redbook\Exceptions\RedisKeyException $exception )
         {
             $View = \View::make( PACKAGE . '.error', array( 'error' => $exception->getMessage() ) );
         }
@@ -147,7 +147,7 @@ class RedbookDatabaseController extends RedbookBaseController {
                 $Objects[] = generateHtmlSnippet( $this->_Provider->getValueByKeyName( $key ) );
             }
         }
-        catch ( \Reeck\Redbook\Exceptions\RedisKeyException $exception )
+        catch ( \Mahngiel\Redbook\Exceptions\RedisKeyException $exception )
         {
             $this->data['error'] = $exception->getMessage();
         }

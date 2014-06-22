@@ -3,9 +3,9 @@
 class RedbookConsoleController extends RedbookBaseController {
 
     /**
-     * @param Reeck\Redbook\Support\RedisReader $Provider
+     * @param Mahngiel\Redbook\Support\RedisReader $Provider
      */
-    public function __construct( \Reeck\Redbook\Support\RedisReader $Provider )
+    public function __construct( \Mahngiel\Redbook\Support\RedisReader $Provider )
     {
         parent::__construct();
 
