@@ -1,5 +1,5 @@
 {
-    "name": "reeck/redbook",
+    "name": "mahngiel/redbook",
     "description": "",
     "authors": [
         {
@@ -18,7 +18,7 @@
             "src/controllers"
         ],
         "psr-0": {
-            "Reeck\\Redbook\\": "src/"
+            "Mahngiel\\Redbook\\": "src/"
         }
     },
     "minimum-stability": "stable"
