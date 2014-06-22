@@ -71,8 +71,6 @@ class Index_Module extends Modules {
 
         $this->data['Objects'] = mapRedisSchema($RedisReader->findAllStoresForDatabase(), \Config::get('redbook::redbook.schemaSeparator'));
 
-//        debug($this->data['Objects']);
-
         parent::rawContainer( MODULE . 'index', $this->data );
     }
 }
