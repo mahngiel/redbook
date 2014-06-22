@@ -239,7 +239,7 @@ $( d ).on( 'click', 'a.ajaxSchemaKey', function ( event ) {
 
     $('#page').load( navLink.prop( 'href' ) );
 
-    history.pushState( this, null, navLink.prop( 'href' ) );
+    history.pushState( null, null, navLink.prop( 'href' ) );
 } );
 
 /* ----------------------------------- FORM INPUT AGGREGATE ----------------------------------------- */

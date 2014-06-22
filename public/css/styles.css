@@ -1735,15 +1735,6 @@ ol li a {
     width: auto;
     /* so that it's not 100% */
   }
-  #redbook-main #page #page-title {
-    border-bottom: 1px solid #000;
-    height: 2.5em;
-    /* 40 / 16 */
-    line-height: 2.5em;
-  }
-  #redbook-main #page #page-title h3 {
-    margin: 0;
-  }
 }
 /**
  * Redbook Console
@@ -1780,4 +1771,45 @@ ol li a {
 #wait img {
   position: absolute;
   top: 50%;
+}
+#page #page-title {
+  background-color: #136687;
+  color: #f3f3f3;
+}
+#page #page-title > div {
+  display: inline-block;
+  height: 2.5em;
+  /* 40 / 16 */
+  line-height: 2.5em;
+}
+#page #page-title #key-type {
+  border-right: 1px solid #000;
+  padding: 0 0.5em;
+}
+#page #page-title #key-name {
+  padding: 0 0.5em;
+}
+#page #page-title #key-name i {
+  color: #353d47;
+}
+#page #page-title #key-options {
+  float: right;
+}
+#page #page-title #key-options a {
+  border-left: 1px solid #000;
+  float: left;
+  display: block;
+  text-align: center;
+  color: #f3f3f3;
+}
+#page #page-title #key-options a i {
+  display: block;
+  height: 2.5em;
+  width: 2.5em;
+  line-height: 2.5em;
+  vertical-align: middle;
+}
+#page #page-title #key-options a:hover {
+  background-color: #f3f3f3;
+  color: #1ea8de;
 }
