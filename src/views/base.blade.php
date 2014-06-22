@@ -8,7 +8,7 @@
         <title>Redbook Redis Schema Viewer</title>
         <script type="text/javascript">
             Redbook = [];
-            Redbook.base_url = '<?php echo Request::getSchemeAndHttpHost() .'/'. REDBOOK_URI ?>';
+            Redbook.base_url = '<?php echo Request::getSchemeAndHttpHost() . REDBOOK_URI ?>';
             Redbook.asset_url = '<?php echo ASSET_URL; ?>';
         </script>
         {{ Colophon::getHeadScripts() }}
