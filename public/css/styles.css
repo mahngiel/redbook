@@ -1707,6 +1707,9 @@ ol li a {
     overflow-y: auto;
     overflow-x: hidden;
   }
+  #redbook-schema #redbook-schema-tree ul.schema-container {
+    display: none;
+  }
   #redbook-schema #redbook-schema-tree li.schema-key:hover {
     background-color: #dddddd;
   }
@@ -1760,4 +1763,21 @@ ol li a {
   width: 2em;
   text-align: center;
   line-height: 2em;
+}
+/**
+ * Wait box
+ */
+#wait {
+  z-index: 50;
+  background-color: rgba(7, 39, 51, 0.5);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+}
+#wait img {
+  position: absolute;
+  top: 50%;
 }

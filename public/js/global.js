@@ -1,7 +1,7 @@
 // ------------------------------------ GLOBAL ASSIGNMENT -------------------------------------------- //
 d = document;
 
-var pageWait = $( '<div id="wait"><div id = "waitStripe" > <img src="' + Redbook.asset_url + 'img/preloader.gif" /></div></div>' );
+var pageWait = $( '<div id="wait"><img src="' + Redbook.asset_url + 'img/preloader.gif" /></div>' );
 
 // ---------------------------------- FUNCTION REGISTRATION ------------------------------------------ //
 
@@ -175,10 +175,6 @@ WebFontConfig = {
     s.parentNode.insertBefore( wf, s );
 })();
 
-(function ( $ ) {
-    $( '.schema-container' ).hide();
-
-})( jQuery );
 $( d ).on( 'click', 'a.schema-collapse', function ( e ) {
     e.preventDefault();
     $( this ).siblings( '.schema-container' ).slideToggle();

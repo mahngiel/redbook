@@ -1,4 +1,4 @@
-var navRoot = $( '#root' ), navTarget = $( '#page' ), navLink = null;
+var navRoot = $( '#page' ), navTarget = $( '#page' ), navLink = null;
 
 /* Enabled refreshing w/o losing your page */
 if ( $.cookie( 'last-page' ) && document.location.href !== $.cookie( 'last-page' ) ) {
@@ -227,6 +227,19 @@ $( d ).on( 'click', 'a.changeSchema', function ( event ) {
     navTarget.load( navLink.prop( 'href' ) );
 
     history.pushState( null, null, navLink.prop( 'href' ) );
+} );
+
+$( d ).on( 'click', 'a.ajaxSchemaKey', function ( event ) {
+
+    event.preventDefault();
+
+    navTarget.prepend( pageWait );
+
+    navLink = $( this );
+
+    $('#page').load( navLink.prop( 'href' ) );
+
+    history.pushState( this, null, navLink.prop( 'href' ) );
 } );
 
 /* ----------------------------------- FORM INPUT AGGREGATE ----------------------------------------- */
