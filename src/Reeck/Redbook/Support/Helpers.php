@@ -1149,7 +1149,7 @@ function makeRedisSchemaTree( array $tree, $newRound = true, $oldWord = null )
     {
         if (is_array( $ele ))
         {
-            $out .= '<li class=""><a href="' . REDBOOK_URI . 'schema/' . $k . '"><i class="fa fa-folder-o"></i> ' . $k . '</a>';
+            $out .= '<li><a href="#" class="schema-collapse"><i class="fa fa-folder-o"></i> ' . $k . '</a>';
             $out .= '<ul class="schema-container">' . makeRedisSchemaTree( $tree[$k], false, $oldWord . $k ) . '</ul>';
             $out .= '</li>';
         }
