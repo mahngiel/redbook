@@ -158,4 +158,37 @@ class RedisReader extends Redis {
     {
         return $this->dbsize();
     }
+
+    public function fire( $command )
+    {
+        // chunk and trim
+        $commandArgs = array_map(function($arg){ return trim($arg); }, explode(' ', $command));
+
+        if( empty($commandArgs) ) {
+            throw new \RedisException('No command issued');
+        }
+
+        $command = array_shift($commandArgs);
+
+        switch( count($commandArgs) )
+        {
+            case 0:
+                $r = $this->{$command}();
+                break;
+            case 1:
+                $r = $this->{$command}( $commandArgs[0] );
+                break;
+            case 2:
+                $r = $this->{$command}( $commandArgs[0], $commandArgs[1] );
+                break;
+            case 3:
+                $r = $this->{$command}( $commandArgs[0], $commandArgs[1], $commandArgs[2] );
+                break;
+            case 4:
+                $r = $this->{$command}( $commandArgs[0], $commandArgs[1], $commandArgs[2], $commandArgs[3] );
+                break;
+        }
+
+        return $r;
+    }
 } 

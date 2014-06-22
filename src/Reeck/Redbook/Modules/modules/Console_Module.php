@@ -53,6 +53,9 @@ class Console_Module extends Modules {
 
     public function run()
     {
+        // Add console script to DOM
+        \Colophon::addScriptToFooter('App_Console', 'js/console.js');
+
         parent::rawContainer( MODULE . 'console', $this->data );
     }
 }

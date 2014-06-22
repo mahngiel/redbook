@@ -1,22 +1,28 @@
 <?php
 
-use Reeck\Redbook\Support\RedisReader;
+class RedbookConsoleController extends RedbookBaseController {
 
-class RedbookDatabaseController extends RedbookBaseController {
-
-    public function activate( $databaseName )
+    /**
+     * @param Reeck\Redbook\Support\RedisReader $Provider
+     */
+    public function __construct( \Reeck\Redbook\Support\RedisReader $Provider )
     {
-        \Session::put('activeDatabase', $databaseName);
+        parent::__construct();
 
-        if( !\Request::ajax() )
+        $this->_Provider = $Provider;
+    }
+
+    public function call()
+    {
+        try
         {
-            return Redirect::route('redbook');
+            $response = $this->_Provider->fire( Input::get('command') );
+        }
+        catch( \Predis\ServerException $exception )
+        {
+            $response = $exception->getMessage();
         }
 
-        $RedisReader = new RedisReader( $databaseName );
-
-        $this->data['Objects'] = mapRedisSchema( $RedisReader->findAllStoresForDatabase(), \Config::get( 'redbook::redbook.schemaSeparator' ) );
-
-        return View::make( MODULE . 'schema', $this->data );
+        debug($response);
     }
 } 

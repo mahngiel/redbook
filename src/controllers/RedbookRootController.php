@@ -13,6 +13,7 @@ class RedbookRootController extends RedbookBaseController {
     public function __construct( \Reeck\Redbook\Support\RedisReader $Provider )
     {
         parent::__construct();
+
         $this->_Provider = $Provider;
     }
 

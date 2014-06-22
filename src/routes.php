@@ -12,3 +12,5 @@ defined("REDBOOK_URI") or define( "REDBOOK_URI", \Config::get('redbook::redbook.
 \Route::get( REDBOOK_URI.'schema/{key}' , 'RedbookRootController@readSchema');
 
 \Route::get( REDBOOK_URI.'database/{database}', 'RedbookDatabaseController@activate' );
+
+\Route::post( REDBOOK_URI . 'call',     'RedbookConsoleController@call');
