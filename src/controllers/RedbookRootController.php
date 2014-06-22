@@ -41,16 +41,15 @@ class RedbookRootController extends RedbookBaseController {
         try
         {
             $this->data['Object'] = $this->_Provider->getValueByKeyName( $key );
+
+            $View = \View::make( FRONTEND . $this->_ViewDir . ".types.{$this->data['Object']['type']}", $this->data );
         }
         catch ( \Reeck\Redbook\Exceptions\RedisKeyException $exception )
         {
-            $this->data['error'] = $exception->getMessage();
+            $View = \View::make( FRONTEND . $this->_ViewDir . '.error', array('error'=>$exception->getMessage()));
         }
 
-
-        $View = \View::make( FRONTEND . $this->_ViewDir . '.output', $this->data );
-
-        if( Request::ajax() )
+        if (Request::ajax())
         {
             return $View;
         }
@@ -58,23 +57,6 @@ class RedbookRootController extends RedbookBaseController {
         {
             $this->layout->content = $View;
         }
-
-//        if (isset( $this->data['Object'] ))
-//        {
-//            switch ($this->data['Object']['type'])
-//            {
-//                case 'string':
-//                    $this->layout->content->nest( 'definition', FRONTEND . $this->_ViewDir . '.keytypes.string', $this->data );
-//                    break;
-//                case 'set':
-//                case 'list':
-//                    $this->layout->content->nest( 'definition', FRONTEND . $this->_ViewDir . '.keytypes.array', $this->data );
-//                    break;
-//                case 'hash':
-//                    $this->layout->content->nest( 'definition', FRONTEND . $this->_ViewDir . '.keytypes.hash', $this->data );
-//                    break;
-//            }
-//        }
     }
 
     public function readSchema( $schema )
