@@ -68,9 +68,6 @@ class Colophon {
         defined( 'ASSET_URL' ) or define( 'ASSET_URL', \Request::getSchemeAndHttpHost() . '/packages/reeck/redbook/' );
 
         // View paths
-        defined( 'FRONTEND' ) or define( 'FRONTEND', PACKAGE . 'frontend.' );
-        defined( 'BACKEND' ) or define( 'BACKEND', PACKAGE . 'backend.' );
-        defined( 'PARTIAL' ) or define( 'PARTIAL', PACKAGE . 'partials.' );
         defined( 'MODULE' ) or define( 'MODULE', PACKAGE . 'modules.' );
 
         // Cache the environment's config file

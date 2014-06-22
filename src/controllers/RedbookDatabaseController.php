@@ -2,6 +2,9 @@
 
 use Reeck\Redbook\Support\RedisReader;
 
+/**
+ * Class RedbookDatabaseController
+ */
 class RedbookDatabaseController extends RedbookBaseController {
 
     /**
@@ -14,6 +17,30 @@ class RedbookDatabaseController extends RedbookBaseController {
         $this->_Provider = $Provider;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        try
+        {
+            $this->data['Database'] = $this->_Provider->getDatabaseInformation();
+        }
+        catch ( \Predis\Connection\ConnectionException $e )
+        {
+            $this->data['Alert'] = $e->getMessage();
+        }
+
+        $this->layout->content = \View::make( PACKAGE . '.database', $this->data );
+    }
+
+    /**
+     * @param $databaseName
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function activate( $databaseName )
     {
         \Session::put( 'activeDatabase', $databaseName );
@@ -30,17 +57,22 @@ class RedbookDatabaseController extends RedbookBaseController {
         return View::make( MODULE . 'schema', $this->data );
     }
 
+    /**
+     * @param $key
+     *
+     * @return \Illuminate\View\View
+     */
     public function readKey( $key )
     {
         try
         {
             $this->data['Object'] = $this->_Provider->getValueByKeyName( $key );
 
-            $View = \View::make( FRONTEND . $this->_ViewDir . "redis.types.{$this->data['Object']['type']}", $this->data );
+            $View = \View::make( PACKAGE . "types.{$this->data['Object']['type']}", $this->data );
         }
         catch ( \Reeck\Redbook\Exceptions\RedisKeyException $exception )
         {
-            $View = \View::make( FRONTEND . $this->_ViewDir . '.error', array( 'error' => $exception->getMessage() ) );
+            $View = \View::make( PACKAGE . '.error', array( 'error' => $exception->getMessage() ) );
         }
 
         if (Request::ajax())
@@ -53,6 +85,9 @@ class RedbookDatabaseController extends RedbookBaseController {
         }
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function deleteKey()
     {
         if (!Input::has( 'database' ) || !Input::has( 'keyName' ))
@@ -79,6 +114,12 @@ class RedbookDatabaseController extends RedbookBaseController {
         return Response::json( $this->response );
     }
 
+    /**
+     * @param $databaseName
+     * @param $keyName
+     *
+     * @return \Illuminate\View\View
+     */
     public function editKey( $databaseName, $keyName )
     {
         \Session::put( 'activeDatabase', $databaseName );
@@ -89,6 +130,31 @@ class RedbookDatabaseController extends RedbookBaseController {
         $this->data['database'] = $databaseName;
 
 
-        return View::make( FRONTEND . '.redis.modals.keyEdit', $this->data );
+        return View::make( FRONTEND . 'modals.keyEdit', $this->data );
+    }
+
+    /**
+     * @param $schema
+     */
+    public function readSchema( $schema )
+    {
+        try
+        {
+            $Objects = array();
+
+            foreach ($this->_Provider->findKeysByPrefix( $schema ) as $key)
+            {
+                $Objects[] = generateHtmlSnippet( $this->_Provider->getValueByKeyName( $key ) );
+            }
+        }
+        catch ( \Reeck\Redbook\Exceptions\RedisKeyException $exception )
+        {
+            $this->data['error'] = $exception->getMessage();
+        }
+
+        $this->data['schema']  = $schema;
+        $this->data['Objects'] = $Objects;
+
+        $this->layout->content = \View::make( PACKAGE . 'schema', $this->data );
     }
 } 

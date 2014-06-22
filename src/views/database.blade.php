@@ -1,5 +1,5 @@
 <div id="page-title">
-    <h3>Redis Databases Dataset</h3>
+    <h3><i class="fa fa-database"></i> Redis Keystores</h3>
 </div>
 
 @if( isset($Database) )
@@ -12,7 +12,7 @@
             </thead>
             @foreach( $Values as $k => $v )
                 <tr>
-                    <td>{{ $k }}</td>
+                    <td>{{ deslug($k, '_') }}</td>
                     <td>{{ !is_array($v) ? $v : json_encode($v) }}</td>
                 </tr>
             @endforeach
