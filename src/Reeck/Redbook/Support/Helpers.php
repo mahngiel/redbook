@@ -1155,7 +1155,7 @@ function makeRedisSchemaTree( array $tree, $newRound = true, $oldWord = null )
         }
         else
         {
-            $out .= '<li class="schema-key"><a data-schema="key" data-key="' . $oldWord . $ele . '" href="' . REDBOOK_URI . 'key/' . $oldWord . $ele . '"><i class="fa fa-key"></i> ' . $oldWord . $ele . '</a>';
+            $out .= '<li class="schema-key"><a class="ajaxSchemaKey" data-schema="key" data-key="' . $oldWord . $ele . '" href="' . REDBOOK_URI . 'key/' . $oldWord . $ele . '"><i class="fa fa-key"></i> ' . $oldWord . $ele . '</a>';
         }
     }
 
