@@ -18,6 +18,7 @@
         <div id="redbook-header">
             <div id="redbook-identity"><a href="{{ REDBOOK_URI }}">{{ Colophon::getAppName() }}</a></div>
         </div>
+
         <div id="redbook" class="pure-g">
 
             {{-- Sidebars --}}
