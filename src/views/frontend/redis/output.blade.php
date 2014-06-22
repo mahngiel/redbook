@@ -1,8 +1,9 @@
 <div id="page-title">
-    <h3>
-        <small>{{ $Object['type'] }}</small>
-        {{ $Object['name'] }}
-    </h3>
+    <div id="key-type">{{ $Object['type'] }}</div>
+    <div id="key-name"><i class="fa fa-key"></i> {{ $Object['name'] }}</div>
+    <div id="key-options">
+
+    </div>
 </div>
 
 <div id="definition">
