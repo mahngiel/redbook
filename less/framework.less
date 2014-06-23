@@ -1,6 +1,6 @@
 #redbook-header{
-    height        : 3em; /* 48px */
-    z-index       : 30;
+    height  : 3em; /* 48px */
+    z-index : 30;
 }
 
 /**
@@ -15,108 +15,100 @@
     padding : 0;
 }
 
-#redbook{ }
+#redbook-nav, #redbook-schema, #redbook-main{ }
 
-@media (min-width : 75em){
-    /* Context: 1200px */
-    /**
-     * Database & Schema columns
-     */
-    #redbook-nav, #redbook-schema, #redbook-main{
-        position   : fixed;
-        top        : 3em;
-        bottom     : 0;
-        overflow-x : hidden;
-        overflow-y : auto;
-        width      : auto;
-    }
+#redbook-nav{
+    z-index          : 20;
+    background-color : @navigationColorBackground;
 
-    #redbook-nav{
-        z-index          : 20;
-        width            : 11.25em; /* 180 / 16 */
-        background-color : @navigationColorBackground;
+    li{
+        &.active{
+
+            a{
+                color : @colorSuccess;
+            }
+        }
 
         a{
-            color : @navigationColorLink !important;
-
-            &:hover{
-                color : @navigationColorLinkHover !important;
-            }
-        }
-
-        /* YUI Overrides */
-        .pure-menu.pure-menu-open{
-            border           : none !important;
-            background-color : inherit !important;
-        }
-    }
-
-    #redbook-schema{
-        margin-left      : 11.25em;
-        width            : 20em; /* 320px */
-        background-color : @schemaColorBackground;
-        z-index          : 10;
-        overflow         : hidden;
-
-        #redbook-schema-database{
-            height        : 2.5em; /* 40 / 16 */
-            line-height   : 2.5em;
-            color         : @schemaTitleColor;
-            border-bottom : 1px solid @schemaTitleBorderColor;
-        }
-
-        #redbook-schema-tree{
-            padding     : 0 0.1875em; /* 3 / 16 */
-            font-size   : 0.75em; /* 12 / 16 */
-            font-family : 'Source Code Pro', Monaco, Consolas, "Lucida Console", monospace;
-            font-weight : 400;
-            line-height : 1.5em;
-            height      : 95%;
-            overflow-y  : auto;
-            overflow-x  : hidden;
-
-            ul.schema-container{
-                display:none;
-            }
-
-            li{
-                &.schema-key:hover{
-                    background-color : @schemaColorKeyHover;
-                }
-                a{
-                    color           : @schemaColorLink;
-                    text-decoration : none;
-                    display         : block;
-                    white-space     : nowrap;
-                    &:hover{
-                        color       : @schemaColorLinkHover;
-                        font-weight : 700;
-                    }
-                    &:active{ }
-                }
-                &:hover{
-                    //                    background-color : #fafafa;
-                }
-                &:focus{
-                    //                    color : blue;
-                }
-
-                ul, ol{
-                    padding-left : 8px;
-                }
-            }
 
         }
     }
 
-    #redbook-main{
-        left     : 31.25em;
-        right    : 0;
-        bottom   : 2em;
-        overflow : auto;
-        width    : auto; /* so that it's not 100% */
+    a{
+        color : @navigationColorLink;
+
+        &:hover{
+            color : @navigationColorLinkHover !important;
+        }
+    }
+
+    /* YUI Overrides */
+    .pure-menu.pure-menu-open{
+        border           : none !important;
+        background-color : inherit !important;
     }
 }
+
+#redbook-schema{
+    background-color : @schemaColorBackground;
+    z-index          : 10;
+    overflow         : hidden;
+
+    #redbook-schema-database{
+        color         : @schemaTitleColor;
+        border-bottom : 1px solid @schemaTitleBorderColor;
+    }
+
+    #redbook-schema-tree{
+        font-family : 'Source Code Pro', Monaco, Consolas, "Lucida Console", monospace;
+        font-weight : 400;
+        overflow-y  : auto;
+        overflow-x  : hidden;
+
+        ul.schema-container{
+            display : none;
+        }
+
+        li{
+            &.schema-key:hover{
+                background-color : @schemaColorKeyHover;
+            }
+            a{
+                color           : @schemaColorLink;
+                text-decoration : none;
+                display         : block;
+                white-space     : nowrap;
+                &:hover{
+                    color       : @schemaColorLinkHover;
+                    font-weight : 700;
+                }
+                &:active{ }
+            }
+            &:hover{
+                //                    background-color : #fafafa;
+            }
+            &:focus{
+                //                    color : blue;
+            }
+
+            ul, ol{
+                padding-left : 8px;
+            }
+        }
+
+    }
+}
+
+#redbook-main{
+    left     : 31.25em;
+    right    : 0;
+    bottom   : 2em;
+    overflow : auto;
+    width    : auto; /* so that it's not 100% */
+}
+
+#redbook{ }
+
 
 /**
  * Redbook Console
@@ -137,5 +129,66 @@
             text-align  : center;
             line-height : 2em;
         }
+    }
+}
+
+@media (min-width : 75em){/* Context: 1200px */
+
+    /**
+     * Database & Schema columns
+     */
+    #redbook-nav, #redbook-schema, #redbook-main{
+        position   : fixed;
+        top        : 3em;
+        bottom     : 0;
+        overflow-x : hidden;
+        overflow-y : auto;
+        width      : auto;
+    }
+
+    #redbook-nav{
+        z-index          : 20;
+        width            : 11.25em; /* 180 / 16 */
+    }
+
+    #redbook-schema{
+        margin-left      : 11.25em;
+        width            : 20em; /* 320px */
+        overflow         : hidden;
+
+        #redbook-schema-database{
+            height        : 2.5em; /* 40 / 16 */
+            line-height   : 2.5em;
+            color         : @schemaTitleColor;
+            border-bottom : 1px solid @schemaTitleBorderColor;
+        }
+
+        #redbook-schema-tree{
+            padding     : 0 0.1875em; /* 3 / 16 */
+            font-size   : 0.75em; /* 12 / 16 */
+            line-height : 1.5em;
+            height      : 95%;
+            overflow-y  : auto;
+            overflow-x  : hidden;
+
+            ul.schema-container{
+                display : none;
+            }
+
+            li{
+                ul, ol{
+                    padding-left : 8px;
+                }
+            }
+
+        }
+    }
+
+    #redbook-main{
+        left     : 31.25em;
+        right    : 0;
+        bottom   : 2em;
+        overflow : auto;
+        width    : auto; /* so that it's not 100% */
     }
 }
