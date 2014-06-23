@@ -59,10 +59,11 @@ class Index_Module extends Modules {
 
         $this->data['databases'] = $DB->getDatabaseNames();
 
-        // Set active database
-        $this->data['activeDatabase'] = $DB->getActiveDatabase();
+        // Retrieve active database
+        $activeDatabase = $DB->getActiveDatabase();
 
-        $this->data['Objects'] = mapRedisSchema( $this->data['activeDatabase']->findAllStoresForDatabase(), $DB->getNamespaceSeparator() );
+        // Map its schema
+        $this->data['Objects'] = $activeDatabase->mapRedisSchema();
 
         parent::rawContainer( MODULE . 'index', $this->data );
     }

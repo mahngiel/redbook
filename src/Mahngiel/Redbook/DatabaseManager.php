@@ -1,29 +1,27 @@
-<?php namespace Mahngiel\Redbook;  
+<?php namespace Mahngiel\Redbook;
 
 use Mahngiel\Redbook\Support\RedisReader;
 
 class DatabaseManager {
 
-    public $namespaceSeparator = ':';
-
     public function getDatabases()
     {
-        return \Config::get('redbook::databases');
+        return \Config::get( 'redbook::databases' );
     }
 
     public function getDatabaseNames()
     {
-        return array_keys($this->getDatabases());
+        return array_keys( $this->getDatabases() );
     }
 
     public function setActiveDatabase( $databaseName )
     {
-        if( !in_array($databaseName, $this->getDatabaseNames()) )
+        if (!in_array( $databaseName, $this->getDatabaseNames() ))
         {
             return false;
         }
 
-        \Session::set('activeDatabase', $databaseName);
+        \Session::set( 'activeDatabase', $databaseName );
     }
 
     /**
@@ -31,16 +29,6 @@ class DatabaseManager {
      */
     public function getActiveDatabase()
     {
-        return new RedisReader( \Session::get('activeDatabase') );
+        return new RedisReader( \Session::get( 'activeDatabase' ) );
     }
-
-    public function setNamespaceSeparator( $separator = null )
-    {
-        $this->namespaceSeparator = $separator?: \Config::get( 'redbook::redbook.schemaSeparator' );
-    }
-
-    public function getNamespaceSeparator()
-    {
-        return $this->namespaceSeparator;
-    }
-} 
+}

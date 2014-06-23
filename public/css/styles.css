@@ -1614,6 +1614,7 @@ a:visited:hover,
 a:active:hover,
 a:focus:hover {
   color: #000000;
+  text-decoration: none;
 }
 ul,
 ol {
@@ -1654,7 +1655,10 @@ ol li a {
   /* YUI Overrides */
 }
 #redbook-nav li.active a {
-  color: #61a45a;
+  background-color: #136687;
+}
+#redbook-nav li.active a:hover {
+  color: #ffffff !important;
 }
 #redbook-nav a {
   color: #ffffff;

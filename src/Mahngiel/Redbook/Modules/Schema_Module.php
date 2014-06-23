@@ -1,6 +1,7 @@
 <?php namespace Mahngiel\Redbook\Modules\Modules;
 
 use Mahngiel\Modules\Modules;
+use Mahngiel\Redbook\DatabaseManager;
 use Mahngiel\Redbook\Support\RedisReader;
 
 class Schema_Module extends Modules {
@@ -53,9 +54,15 @@ class Schema_Module extends Modules {
 
     public function run()
     {
-        $RedisReader = new RedisReader( \Session::get( 'activeDatabase', 'default' ) );
+        $DB = new DatabaseManager();
 
-        $this->data['Objects'] = mapRedisSchema($RedisReader->findAllStoresForDatabase(), \Config::get('redbook::redbook.schemaSeparator'));
+//        $this->data['databases'] = $DB->getDatabaseNames();
+
+        // Set active database
+        $this->data['activeDatabase'] = $DB->getActiveDatabase();
+//        $RedisReader = new RedisReader( \Session::get( 'activeDatabase', 'default' ) );
+
+        $this->data['Objects'] = mapRedisSchema( $this->data['activeDatabase']->findAllStoresForDatabase(), $DB->getNamespaceSeparator() );
 
         parent::rawContainer( MODULE . 'schema', $this->data );
     }

@@ -11,6 +11,8 @@ use Mahngiel\Redis\Redis;
  */
 class RedisReader extends Redis {
 
+    public $namespaceSeparator = ':';
+
     /**
      * @param null $database
      */
@@ -199,5 +201,73 @@ class RedisReader extends Redis {
         }
 
         return $r;
+    }
+
+    /**
+     * @param null $separator
+     */
+    public function setNamespaceSeparator( $separator = null )
+    {
+        $this->namespaceSeparator = $separator ? : \Config::get( 'redbook::redbook.schemaSeparator' );
+    }
+
+    /**
+     * @return string
+     */
+    public function getNamespaceSeparator()
+    {
+        return $this->namespaceSeparator;
+    }
+
+    /**
+     * Combine namespace strings into arrays
+     *
+     * foo:bar = [foo => [bar] ]
+     *
+     * @param array  $namespaces
+     * @param string $separator
+     *
+     * @return array
+     */
+    public function mapRedisSchema()
+    {
+        $namespaces = $this->findAllStoresForDatabase();
+
+        // create container for keys
+        $container = array();
+
+        // iterate through each key
+        foreach ($namespaces as $namespace)
+        {
+            // break up by the namespace
+            $path = explode( $this->getNamespaceSeparator(), $namespace );
+
+            // create a copy of the container
+            $root = & $container;
+
+            // cache last key
+            $value = last( $path );
+
+            // glue the element to its predecessor
+            while (count( $path ) > 1)
+            {
+                // take the top key
+                $branch = array_shift( $path );
+
+                // make this key an array if not exists
+                if (!isset( $root[$branch] ))
+                {
+                    $root[$branch] = array();
+                }
+
+                // and attach it to it's predecessor
+                $root = & $root[$branch];
+            }
+
+            // add the final piece back on
+            $root[] = $value;
+        }
+
+        return $container;
     }
 } 
