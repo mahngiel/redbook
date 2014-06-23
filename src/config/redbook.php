@@ -3,7 +3,8 @@
 /**
  * Redbook configurations
  */
-return array (
-        'routeIndex' => '/redbook',
-        'schemaSeparator' => ':',
-    );
+return array(
+    'routeIndex'      => '/redbook',
+    'schemaSeparator' => ':',
+    'daemonPath'      => storage_path( 'logs/daemons/' ),
+);

@@ -1,7 +1,9 @@
 <?php namespace Mahngiel\Redbook\Modules\Modules;
 
 use Mahngiel\Modules\Modules;
+use Mahngiel\Redbook\DatabaseManager;
 use Mahngiel\Redbook\Support\RedisReader;
+use Predis\Connection\ConnectionException;
 
 class Index_Module extends Modules {
 
@@ -53,23 +55,14 @@ class Index_Module extends Modules {
 
     public function run()
     {
-        $this->data['databases'] = array();
+        $DB = new DatabaseManager();
 
-        // Grab the list of databases
-        foreach( \Config::get('redbook::database.redis') as $databaseName => $databaseConfig )
-        {
-            if( is_array($databaseConfig) )
-            {
-                $this->data['databases'][] = $databaseName;
-            }
-        }
+        $this->data['databases'] = $DB->getDatabaseNames();
 
         // Set active database
-        $this->data['activeDatabase'] = \Session::get('activeDatabase', 'default');
+        $this->data['activeDatabase'] = $DB->getActiveDatabase();
 
-        $RedisReader = new RedisReader( $this->data['activeDatabase']);
-
-        $this->data['Objects'] = mapRedisSchema($RedisReader->findAllStoresForDatabase(), \Config::get('redbook::redbook.schemaSeparator'));
+        $this->data['Objects'] = mapRedisSchema( $this->data['activeDatabase']->findAllStoresForDatabase(), $DB->getNamespaceSeparator() );
 
         parent::rawContainer( MODULE . 'index', $this->data );
     }

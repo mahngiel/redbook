@@ -11,4 +11,15 @@ class RedbookRootController extends RedbookBaseController {
 
         $this->_Provider = $Provider;
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $this->layout->content = \View::make( PACKAGE . '.index', $this->data );
+    }
+
 }

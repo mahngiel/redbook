@@ -5,8 +5,11 @@
                 <ul>
                     <li class="pure-menu-heading">Databases</li>
                     @foreach( $databases as $databaseOption )
-                        <li>
-                            <a class="changeSchema" href="{{ REDBOOK_URI . 'database/'. $databaseOption }}"><i class="fa fa-database fa-fw"></i> {{ $databaseOption }}</a>
+                        <li {{ \Session::get('activeDatabase') == $databaseOption ? 'class="active"' : '' }}>
+                            <a class="changeSchema" href="{{ REDBOOK_URI . 'database/'. $databaseOption }}">
+                                <i class="fa fa-database fa-fw"></i>
+                                {{ $databaseOption }}
+                            </a>
                         </li>
                     @endforeach
                 </ul>
