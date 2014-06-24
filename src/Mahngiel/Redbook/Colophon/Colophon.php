@@ -153,6 +153,7 @@ class Colophon {
             'Bootstrap'      => 'js/libs/bootstrap.min.js',
             'App_global'     => 'js/global.js',
             'App_navigation' => 'js/navigation.js',
+            'App_stuff'      => 'js/main.js',
         );
     }
 

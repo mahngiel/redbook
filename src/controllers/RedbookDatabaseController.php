@@ -70,7 +70,7 @@ class RedbookDatabaseController extends RedbookBaseController {
 
             $View = \View::make( PACKAGE . "types.{$this->data['Object']['type']}", $this->data );
         }
-        catch ( \Mahngiel\Redbook\Exceptions\RedisKeyException $exception )
+        catch ( \Mahngiel\Redis\Exceptions\RedisKeyException $exception )
         {
             $View = \View::make( PACKAGE . '.error', array( 'error' => $exception->getMessage() ) );
         }
@@ -147,7 +147,7 @@ class RedbookDatabaseController extends RedbookBaseController {
                 $Objects[] = generateHtmlSnippet( $this->_Provider->getValueByKeyName( $key ) );
             }
         }
-        catch ( \Mahngiel\Redbook\Exceptions\RedisKeyException $exception )
+        catch ( \Mahngiel\Redis\Exceptions\RedisKeyException $exception )
         {
             $this->data['error'] = $exception->getMessage();
         }
