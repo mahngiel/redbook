@@ -1,5 +1,7 @@
 @include( PACKAGE . 'types._titlebar', array('Object'=>$Object) )
 
 <div id="definition">
-    {{ generateHtmlSnippet($Object) }}
+    @foreach( $Object['value'] as $value )
+        <div class="editable">{{ $value }}</div>
+    @endforeach
 </div>
