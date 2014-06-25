@@ -1630,6 +1630,10 @@ ul li a,
 ol li a {
   display: block;
 }
+.pure-table {
+  width: 100%;
+  margin-bottom: 1em;
+}
 #redbook-header {
   height: 3em;
   /* 48px */
