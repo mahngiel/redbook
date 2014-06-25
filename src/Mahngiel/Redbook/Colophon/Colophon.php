@@ -17,7 +17,7 @@ class Colophon {
     /**
      * Application Name
      */
-    const app_name = 'Redbook Redis Viewer';
+    const app_name = 'Redbook: A Redis&reg; Schema Visualizer';
 
     /**
      * Environment's config file

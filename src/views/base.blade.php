@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A layout example that shows off a responsive email layout.">
 
-        <title>Redbook Redis Schema Viewer</title>
+        <title>Redbook: A Redis&reg; Schema Visualizer</title>
         <script type="text/javascript">
             Redbook = [];
             Redbook.name = '<?php echo Colophon::getAppName(); ?>';
