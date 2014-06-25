@@ -1722,15 +1722,14 @@ ol li a {
   width: 100%;
 }
 #redbook-console #console-handler {
-  height: 2em;
-  border-top: 1px solid #000;
   background-color: #e5e5e5;
+  border-top: 1px solid #000;
+  height: 2.5em;
+  padding: 0.125em;
 }
-#redbook-console #console-handler i.fa {
-  height: 2em;
-  width: 2em;
-  text-align: center;
-  line-height: 2em;
+#redbook-console #console-handler #terminal {
+  max-width: 40em;
+  /* 640px */
 }
 @media (min-width: 75em) {
   /* Context: 1200px */
