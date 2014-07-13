@@ -120,7 +120,12 @@ Array.prototype.diff = function ( a ) {
     }
 
     /* ----------------------------------- NAVIGATION ------------------------------------------ */
-    var schemaChangeTarget = '#redbook-schema', pageWait = $( '<div id="wait"><img src="' + Redbook.assetUrl + 'img/preloader.gif" /></div>' ), navRoot = $( '#page' ), navTarget = $( '#page' ), navLink = null;
+    var schemaChangeTarget = '#redbook-schema',
+        databaseListContainer = '#redbook-databases',
+        schemaTreeItem = '.schema-key',
+        pageWait = $( '<div id="wait"><img src="' + Redbook.assetUrl + 'img/preloader.gif" /></div>' ), navRoot = $( '#page' ),
+        navTarget = $( '#page' ),
+        navLink = null;
 
     $( d ).ajaxStart( function () { navTarget.prepend( pageWait ); } );
     $( d ).ajaxError( function () { pageWait.remove(); } );
@@ -131,9 +136,11 @@ Array.prototype.diff = function ( a ) {
      */
     $( d ).on( 'click', 'a.changeSchema', function ( event ) {
         event.preventDefault();
+        $( databaseListContainer + ' li' ).removeClass( 'active' );
         navTarget = $( schemaChangeTarget );
         navTarget.prepend( pageWait );
         navLink = $( this );
+        navLink.closest('li' ).addClass('active');
         navTarget.load( navLink.prop( 'href' ), function () {mapAvailableSchema();} );
         history.pushState( null, null, navLink.prop( 'href' ) );
     } );
@@ -143,8 +150,11 @@ Array.prototype.diff = function ( a ) {
      */
     $( d ).on( 'click', 'a.ajaxSchemaKey', function ( event ) {
         event.preventDefault();
+        $( schemaTreeItem+'.active' ).removeClass( 'active' );
+        navTarget = $( schemaChangeTarget );
         navTarget.prepend( pageWait );
         navLink = $( this );
+        navLink.parent(schemaTreeItem).addClass('active');
         $( '#page' ).load( navLink.prop( 'href' ) );
         history.pushState( null, null, navLink.prop( 'href' ) );
     } );

@@ -29,19 +29,22 @@
     z-index          : 20;
     background-color : @navigationColorBackground;
 
-    li{
-        &.active{
+    #redbook-databases{
 
-            a{
-                background-color : @colorGamma;
+        li{
+            &.active{
 
-                &:hover{
-                    color : @navigationColorLink !important;
+                a{
+                    background-color : @colorGamma;
+
+                    &:hover{
+                        color : @navigationColorLink !important;
+                    }
                 }
             }
-        }
 
-        a{
+            a{
+            }
         }
     }
 
@@ -90,6 +93,11 @@
         .tree-root{
             margin  : 0;
             padding : 0;
+
+            .active{
+                background-color : @schemaColorKeyHover;
+                font-weight      : 700;
+            }
         }
 
         ul.schema-container{
