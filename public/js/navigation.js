@@ -1,20 +1,20 @@
-var navRoot = $( '#page' ), navTarget = $( '#page' ), navLink = null;
+//var navRoot = $( '#page' ), navTarget = $( '#page' ), navLink = null;
 
 /* Enabled refreshing w/o losing your page */
 if ( $.cookie( 'last-page' ) && document.location.href !== $.cookie( 'last-page' ) ) {
     //navTarget.load( $.cookie( 'last-page' ) );
 }
 
-$( d ).ajaxStart( function () {
-    navTarget.prepend( pageWait );
-} );
-$( d ).ajaxError( function () {
-    pageWait.remove();
-} );
-$( d ).ajaxComplete( function () {
-    pageWait.remove();
-    prepDOM();
-} );
+//$( d ).ajaxStart( function () {
+//    navTarget.prepend( pageWait );
+//} );
+//$( d ).ajaxError( function () {
+//    pageWait.remove();
+//} );
+//$( d ).ajaxComplete( function () {
+//    pageWait.remove();
+//    prepDOM();
+//} );
 
 // Monitor the URI
 window.addEventListener( "popstate", function ( e ) {
@@ -202,35 +202,35 @@ $( d ).on( 'click', 'a.ajaxToggle', function ( event ) {
     } );
 } );
 
-$( d ).on( 'click', 'a.changeSchema', function ( event ) {
-    event.preventDefault();
-
-    var targetElement = '#redbook-schema';
-
-    // set navRoot
-    navTarget = $( targetElement );
-
-    navTarget.prepend( pageWait );
-
-    navLink = $( this );
-
-    navTarget.load( navLink.prop( 'href' ) );
-
-    history.pushState( null, null, navLink.prop( 'href' ) );
-} );
-
-$( d ).on( 'click', 'a.ajaxSchemaKey', function ( event ) {
-
-    event.preventDefault();
-
-    navTarget.prepend( pageWait );
-
-    navLink = $( this );
-
-    $( '#page' ).load( navLink.prop( 'href' ) );
-
-    history.pushState( null, null, navLink.prop( 'href' ) );
-} );
+//$( d ).on( 'click', 'a.changeSchema', function ( event ) {
+//    event.preventDefault();
+//    Redbook.changeSchema( this );
+//    var targetElement = '#redbook-schema';
+//
+//    // set navRoot
+//    navTarget = $( targetElement );
+//
+//    navTarget.prepend( pageWait );
+//
+//    navLink = $( this );
+//
+//    navTarget.load( navLink.prop( 'href' ) );
+//
+//    history.pushState( null, null, navLink.prop( 'href' ) );
+//} );
+//
+//$( d ).on( 'click', 'a.ajaxSchemaKey', function ( event ) {
+//
+//    event.preventDefault();
+//
+//    navTarget.prepend( pageWait );
+//
+//    navLink = $( this );
+//
+//    $( '#page' ).load( navLink.prop( 'href' ) );
+//
+//    history.pushState( null, null, navLink.prop( 'href' ) );
+//} );
 
 /* ----------------------------------- FORM INPUT AGGREGATE ----------------------------------------- */
 function getFormInputs( form ) {

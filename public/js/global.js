@@ -1,7 +1,7 @@
 // ------------------------------------ GLOBAL ASSIGNMENT -------------------------------------------- //
-d = document;
-
-var pageWait = $( '<div id="wait"><img src="' + Redbook.asset_url + 'img/preloader.gif" /></div>' );
+//d = document;
+//
+//var pageWait = $( '<div id="wait"><img src="' + Redbook.asset_url + 'img/preloader.gif" /></div>' );
 
 // ---------------------------------- FUNCTION REGISTRATION ------------------------------------------ //
 
