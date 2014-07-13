@@ -2,17 +2,16 @@
     <div id="redbook-nav" class="pure-u-1">
         <div class="nav-inner">
             <div class="pure-menu pure-menu-open">
-                <ul>
+                <ul id="redbook-databases">
                     <li class="pure-menu-heading">Databases</li>
-                    @foreach( $databases as $databaseOption )
-                    <li
-                    {{ \Session::get('activeDatabase') == $databaseOption ? 'class="active"' : '' }}>
-                            <a class="changeSchema" href="{{ REDBOOK_URI . 'database/'. $databaseOption }}">
+                    <?php foreach( $databases as $databaseOption ): ?>
+                        <li <?php echo \Session::get('activeDatabase') == $databaseOption ? 'class="active"' : '' ;?>>
+                            <a class="changeSchema" href="<?php echo REDBOOK_URI . 'database/'. $databaseOption ;?>">
                                 <i class="fa fa-database fa-fw"></i>
-                                {{ $databaseOption }}
+                                <?php echo $databaseOption ;?>
                             </a>
-                    </li>
-                    @endforeach
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>
