@@ -7,10 +7,11 @@
 
         <title>Redbook: A Redis&reg; Schema Visualizer</title>
         <script type="text/javascript">
-            Redbook = [];
-            Redbook.name = '<?php echo Colophon::getAppName(); ?>';
-            Redbook.base_url = '<?php echo Request::getSchemeAndHttpHost() . REDBOOK_URI ?>';
-            Redbook.asset_url = '<?php echo ASSET_URL; ?>';
+            var Redbook = {
+                name: '<?php echo Colophon::getAppName(); ?>',
+                baseUrl: '<?php echo Request::getSchemeAndHttpHost() . REDBOOK_URI ?>',
+                assetUrl: '<?php echo ASSET_URL; ?>'
+            };
         </script>
         {{ Colophon::getHeadScripts() }}
         {{ Colophon::getStylesheets() }}
