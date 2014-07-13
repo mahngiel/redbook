@@ -165,7 +165,7 @@ class Colophon {
     {
         $this->stylesheets = array(
             'App_Pure'          => array( 'href' => 'css/pure.css' ),
-            'UI_Pure'           => array( 'href' => 'http://yui.yahooapis.com/pure/0.5.0/pure-min.css' ),
+            'UI_Pure'           => array( 'href' => '//yui.yahooapis.com/pure/0.5.0/pure-min.css' ),
             'UI_Bootstrap'      => array( 'href' => 'css/bootstrap.min.css' ),
             'UI_BootstrapTheme' => array( 'href' => 'css/bootstrap-theme.min.css' ),
             'App_custom'        => array( 'href' => 'css/styles.css' ),
