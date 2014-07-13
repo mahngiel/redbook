@@ -24,9 +24,11 @@ interface PresentationInterface {
     /**
      * Tree key element start
      *
+     * @param string $namespace
+     *
      * @return mixed
      */
-    public function getItemObjectStart();
+    public function getItemObjectStart( $namespace );
 
     /**
      * Tree key anchor start
@@ -56,11 +58,12 @@ interface PresentationInterface {
     /**
      * Namespace container list wrapper
      *
+     * @param string $namespace
      * @param $key
      *
      * @return string
      */
-    public function startChildContainer();
+    public function startChildContainer( $namespace );
 
     /**
      * Namespace element anchor start
@@ -93,9 +96,11 @@ interface PresentationInterface {
     /**
      * Namespace tree item wrapper
      *
+     * @param string $namespace
+     *
      * @return string
      */
-    public function startParentContainer();
+    public function startParentContainer( $namespace );
 
     /**
      * Namespace tree item wrapper end

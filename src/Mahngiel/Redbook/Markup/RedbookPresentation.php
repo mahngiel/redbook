@@ -31,11 +31,13 @@ class RedbookPresentation extends Presentation implements PresentationInterface 
     /**
      * Tree key element start
      *
+     * @param string $namespace
+     *
      * @return mixed
      */
-    public function getItemObjectStart()
+    public function getItemObjectStart( $namespace )
     {
-        return '<li class="schema-key">';
+        return '<li class="schema-key" data-namespace="'.$namespace.'">';
     }
 
     /**
@@ -79,9 +81,9 @@ class RedbookPresentation extends Presentation implements PresentationInterface 
      *
      * @return string
      */
-    public function startChildContainer()
+    public function startChildContainer($namespace)
     {
-        return '<li class="schema-namespace">';
+        return '<li class="schema-namespace" data-namespace="'.$namespace.'">';
     }
 
     /**
@@ -127,9 +129,9 @@ class RedbookPresentation extends Presentation implements PresentationInterface 
      *
      * @return string
      */
-    public function startParentContainer()
+    public function startParentContainer($namespace)
     {
-        return '<ul class="schema-container">';
+        return '<ul class="schema-container" data-namespace="'.$namespace.'">';
     }
 
     /**

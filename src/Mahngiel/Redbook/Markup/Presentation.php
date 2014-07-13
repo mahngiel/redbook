@@ -75,7 +75,7 @@ abstract class Presentation {
     protected function generateListItem( $keyName )
     {
         return
-            $this->getItemObjectStart()
+            $this->getItemObjectStart( $keyName )
             . $this->getItemAnchorStart( $keyName )
             . $this->getListItemIcon()
             . $keyName
@@ -94,12 +94,12 @@ abstract class Presentation {
     protected function generateChildContainer( $key, array $tree, $namespace )
     {
         return
-            $this->startChildContainer()
+            $this->startChildContainer( $namespace)
             . $this->getContainerAnchorStart()
             . $this->getChildContainerIcon()
             . $key
             . $this->getContainerAnchorEnd()
-            . $this->startParentContainer()
+            . $this->startParentContainer( $namespace)
             . $this->makeRedisSchemaTree( $tree, false, $namespace )
             . $this->endParentContainer()
             . $this->endChildContainer();
