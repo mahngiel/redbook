@@ -5,12 +5,13 @@
                 <ul>
                     <li class="pure-menu-heading">Databases</li>
                     @foreach( $databases as $databaseOption )
-                        <li {{ \Session::get('activeDatabase') == $databaseOption ? 'class="active"' : '' }}>
+                    <li
+                    {{ \Session::get('activeDatabase') == $databaseOption ? 'class="active"' : '' }}>
                             <a class="changeSchema" href="{{ REDBOOK_URI . 'database/'. $databaseOption }}">
                                 <i class="fa fa-database fa-fw"></i>
                                 {{ $databaseOption }}
                             </a>
-                        </li>
+                    </li>
                     @endforeach
                 </ul>
             </div>
@@ -18,12 +19,6 @@
     </div>
 
     <div id="redbook-schema" class="pure-u-1">
-        <div id="redbook-schema-database">
-            {{ HTML::link( REDBOOK_URI, \Session::get('activeDatabase', 'default') . ' overview' ) }}
-        </div>
-        <div id="redbook-schema-tree">
-            {{ $Object->generateTreeHtml() }}
-        </div>
+        @include( MODULE .'schema')
     </div>
 </div>
-g
