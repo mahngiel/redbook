@@ -1,5 +1,8 @@
 <?php namespace Mahngiel\Redbook\Support;
 
+use Illuminate\Support\Contracts\ArrayableInterface;
+use Illuminate\Support\Contracts\JsonableInterface;
+use Mahngiel\Redbook\Markup\Writer;
 use Mahngiel\Redis\Exceptions\RedisKeyException;
 use Mahngiel\Redis\Exceptions\RedisSchemaException;
 use Mahngiel\Redis\Redis;
@@ -9,9 +12,11 @@ use Mahngiel\Redis\Redis;
  *
  * @package Redbook\Support
  */
-class RedisReader extends Redis {
+class RedisReader extends Redis implements ArrayableInterface, JsonableInterface {
 
     public $namespaceSeparator = ':';
+
+    public $dataStores = array();
 
     /**
      * @param null $database
@@ -71,18 +76,16 @@ class RedisReader extends Redis {
      */
     public function findAllStoresForDatabase()
     {
-        $data = array();
-
-        // read through each key
-        foreach ($this->keys( '*' ) as $key)
+        if( !empty($this->dataStores) )
         {
-            // store the key type
-            $data[] = $key;
+            return $this->dataStores;
         }
 
-        natcasesort( $data );
+        $this->dataStores = $this->keys('*');
 
-        return $data;
+        natcasesort($this->dataStores);
+
+        return $this->dataStores;
     }
 
     /**
@@ -274,4 +277,38 @@ class RedisReader extends Redis {
 
         return $container;
     }
-} 
+
+    /**
+     * Generate HTML presentation of schema
+     *
+     * @return string
+     */
+    public function generateTreeHtml()
+    {
+        $htmlWriter = new Writer();
+
+        return $htmlWriter->render( $this->mapRedisSchema(), $this->getNamespaceSeparator() );
+    }
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->findAllStoresForDatabase();
+    }
+
+    /**
+     * Convert the object to its JSON representation.
+     *
+     * @param  int $options
+     *
+     * @return string
+     */
+    public function toJson( $options = 0 )
+    {
+        return json_encode( $this->findAllStoresForDatabase(), JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+    }
+}
