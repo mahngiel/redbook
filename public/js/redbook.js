@@ -124,7 +124,7 @@ Array.prototype.diff = function ( a ) {
 
     $( d ).ajaxStart( function () { navTarget.prepend( pageWait ); } );
     $( d ).ajaxError( function () { pageWait.remove(); } );
-    $( d ).ajaxComplete( function () { pageWait.remove(); mapAvailableSchema() } );
+    $( d ).ajaxComplete( function () { pageWait.remove(); } );
 
     /**
      * Database change
@@ -134,7 +134,7 @@ Array.prototype.diff = function ( a ) {
         navTarget = $( schemaChangeTarget );
         navTarget.prepend( pageWait );
         navLink = $( this );
-        navTarget.load( navLink.prop( 'href' ) );
+        navTarget.load( navLink.prop( 'href' ), function () {mapAvailableSchema();} );
         history.pushState( null, null, navLink.prop( 'href' ) );
     } );
 
@@ -153,7 +153,7 @@ Array.prototype.diff = function ( a ) {
 
 $( d ).on( 'input change', 'input#schemaSearch', function () {
 
-    var searchTerm = $(this ).val();
+    var searchTerm = $( this ).val();
 
     // Ensure value has changed
     if ( this.value !== this.lastValue && this.value.trim() !== this.lastValue ) {
