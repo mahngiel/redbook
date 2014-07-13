@@ -74,7 +74,7 @@ abstract class Presentation {
      */
     protected function generateListItem( $keyName )
     {
-        return 
+        return
             $this->getItemObjectStart()
             . $this->getItemAnchorStart( $keyName )
             . $this->getListItemIcon()
