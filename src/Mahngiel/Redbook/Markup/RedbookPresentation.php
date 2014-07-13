@@ -37,7 +37,7 @@ class RedbookPresentation extends Presentation implements PresentationInterface 
      */
     public function getItemObjectStart( $namespace )
     {
-        return '<li class="schema-key" data-namespace="'.$namespace.'">';
+        return '<li class="schema-key" data-namespace="'.$namespace.'" title="'.$namespace.'">';
     }
 
     /**
@@ -83,7 +83,7 @@ class RedbookPresentation extends Presentation implements PresentationInterface 
      */
     public function startChildContainer($namespace)
     {
-        return '<li class="schema-namespace" data-namespace="'.$namespace.'">';
+        return '<li class="schema-namespace" data-namespace="'.$namespace.'" title="' . $namespace . '">';
     }
 
     /**
@@ -131,7 +131,7 @@ class RedbookPresentation extends Presentation implements PresentationInterface 
      */
     public function startParentContainer($namespace)
     {
-        return '<ul class="schema-container" data-namespace="'.$namespace.'">';
+        return '<ul class="schema-container" data-namespace="'.$namespace.'" title="' . $namespace . '">';
     }
 
     /**
