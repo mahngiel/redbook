@@ -21,6 +21,8 @@ class RedisReader extends Redis {
         parent::__construct();
 
         $this->database = $database ? : \Session::get( 'activeDatabase', 'default' );
+
+        $this->setNamespaceSeparator( \Config::get("redbook::{$database}.namespace", ':') );
     }
 
     /**
@@ -206,9 +208,9 @@ class RedisReader extends Redis {
     /**
      * @param null $separator
      */
-    public function setNamespaceSeparator( $separator = null )
+    public function setNamespaceSeparator( $separator = ':' )
     {
-        $this->namespaceSeparator = $separator ? : \Config::get( 'redbook::redbook.schemaSeparator' );
+        $this->namespaceSeparator = $separator;
     }
 
     /**
@@ -263,6 +265,8 @@ class RedisReader extends Redis {
                 // and attach it to it's predecessor
                 $root = & $root[$branch];
             }
+
+            if( is_string($root) ) continue;
 
             // add the final piece back on
             $root[] = $value;

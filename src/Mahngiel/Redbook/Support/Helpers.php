@@ -190,6 +190,8 @@ function mapRedisSchema( array $namespaces, $separator = ":" )
             $root = & $root[$branch];
         }
 
+        if (is_string( $root )) continue;
+
         // add the final piece back on
         $root[] = $value;
     }
