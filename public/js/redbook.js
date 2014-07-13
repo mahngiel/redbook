@@ -6,41 +6,78 @@
  */
 
 d = document;
+Array.prototype.diff = function ( a ) {
+    return this.filter( function ( i ) {return a.indexOf( i ) < 0;} );
+};
 
 //Self-Executing Anonymous Function: Part 2 (Public & Private)
 (function ( Redbook, $, undefined ) {
 
     //Private Properties
+    var schema = [];
 
     //Public Properties
     Redbook.ingredient = "Bacon Strips";
 
     //Public Methods
-    Redbook.fry = function () {
-        var oliveOil;
-
-        addItem( "\t\n Butter \n\t" );
-        addItem( oliveOil );
-        console.log( "Frying " + Redbook.ingredient );
-    };
-
     /* Notification creator */
     Redbook.createNotification = function ( level, text ) {
         var notice = $( '#redbook-notifications' ), message = $( '<div class="notice ' + level + '">' + text + '</div>' );
         notice.append( message );
         message.delay( 3000 ).animate( {
-            height : 'toggle',
-            opacity: 'toggle'
+            height: 'toggle', opacity: 'toggle'
         }, 'slow', function () { $( this ).remove(); } );
     };
 
-    //Private Methods
-    function addItem( item ) {
-        if ( item !== undefined ) {
-            console.log( "Adding " + $.trim( item ) );
-        }
-    }
+    /* Cache keys */
+    Redbook.setSchema = function ( objects ) {
+        objs = JSON.parse( objects );
 
+        schema = [];
+
+        $.each( objs, function ( key, value ) {
+            schema.push( value );
+        } );
+
+    };
+
+    Redbook.getSchema = function () {
+        return schema;
+    };
+
+    Redbook.searchSchema = function ( term ) {
+        results = [];
+        $.each( schema, function ( key, value ) {
+            if ( ~value.indexOf( term ) ) {
+                results.push( value );
+            }
+        } );
+
+        return results;
+    };
+
+    Redbook.filterSchemaTree = function ( term ) {
+        var searchResults = Redbook.searchSchema( term );
+
+        /** Revert DOM to default */
+        if ( term == '' ) {
+            $( '.poke' ).removeClass( 'poke' ).removeClass( 'boob' ).removeClass( 'tube' );
+            return false
+        }
+
+        /** Remove tree item visibility from dom */
+        $.each( schema.diff( searchResults ), function ( k, v ) {
+            $( '*[data-namespace="' + v + '"]' ).addClass( 'poke' ).removeClass( 'boob' ).removeClass( 'tube' );
+        } );
+
+        $.each( searchResults, function ( k, v ) {
+            $( '*[data-namespace="' + v + '"]' ).removeClass( 'poke' ).parents( '.schema-container' ).addClass( 'boob' ).attr( 'style', '' ).parents( '.schema-namespace' ).addClass( 'tube' ).attr( 'style', '' );
+        } );
+    };
+
+    mapAvailableSchema();
+
+    //Private Methods
     /**
      *
      * @param form
@@ -54,10 +91,10 @@ d = document;
         var editor = form.find( 'div#editor' );
         var images = form.find( "input[name='images']" );
         if ( editor.length ) {
-            inputs.push( { "name": editor.attr( 'data-formInput' ), "value": '"' + editor.html() + '"' } );
+            inputs.push( {"name": editor.attr( 'data-formInput' ), "value": '"' + editor.html() + '"'} );
         }
         if ( images.length ) {
-            input.push( { "name": "images", "value": images.val() } );
+            input.push( {"name": "images", "value": images.val()} );
         }
 
         // count how many ele's we have so we create correct values
@@ -71,16 +108,23 @@ d = document;
         return values;
     }
 
+    function mapAvailableSchema() {
+        if ( $( '.tree-root' ).length ) {
+            schema = [];
+
+            $.each( $( '*[data-namespace]' ), function ( k, v ) {
+                attr = $( v ).attr( 'data-namespace' );
+                if ( $.inArray( attr, schema ) === -1 ) schema.push( attr );
+            } );
+        }
+    }
+
     /* ----------------------------------- NAVIGATION ------------------------------------------ */
-    var schemaChangeTarget = '#redbook-schema',
-        pageWait = $( '<div id="wait"><img src="' + Redbook.assetUrl + 'img/preloader.gif" /></div>' ),
-        navRoot = $( '#page' ),
-        navTarget = $( '#page' ),
-        navLink = null;
+    var schemaChangeTarget = '#redbook-schema', pageWait = $( '<div id="wait"><img src="' + Redbook.assetUrl + 'img/preloader.gif" /></div>' ), navRoot = $( '#page' ), navTarget = $( '#page' ), navLink = null;
 
     $( d ).ajaxStart( function () { navTarget.prepend( pageWait ); } );
     $( d ).ajaxError( function () { pageWait.remove(); } );
-    $( d ).ajaxComplete( function () { pageWait.remove(); } );
+    $( d ).ajaxComplete( function () { pageWait.remove(); mapAvailableSchema() } );
 
     /**
      * Database change
@@ -105,4 +149,24 @@ d = document;
         history.pushState( null, null, navLink.prop( 'href' ) );
     } );
 
-}(window.Redbook = window.Redbook || {}, jQuery));
+}( window.Redbook = window.Redbook || {}, jQuery ));
+
+$( d ).on( 'input change', 'input#schemaSearch', function () {
+
+    var searchTerm = $(this ).val();
+
+    // Ensure value has changed
+    if ( this.value !== this.lastValue && this.value.trim() !== this.lastValue ) {
+
+        if ( this.timer ) clearTimeout( this.timer );
+
+        this.timer = setTimeout( function () {
+
+            // Fire!
+            Redbook.filterSchemaTree( searchTerm );
+
+        }, 500 );
+
+        this.lastValue = this.value;
+    }
+} );

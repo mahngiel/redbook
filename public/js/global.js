@@ -35,9 +35,7 @@ function createAlert( text ) {
 }
 
 /*
- function history( href ) {
- $.cookie( 'last-page', href );
- }
+ function history( href ) { $.cookie( 'last-page', href ); }
  */
 
 var loopAttempts = 0, maxLoopAttempts = 3, timerID = null;
