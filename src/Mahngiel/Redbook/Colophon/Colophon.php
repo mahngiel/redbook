@@ -151,6 +151,7 @@ class Colophon {
             'jQuery'         => '//code.jquery.com/jquery-2.1.0.min.js',
             'jQuery_cookie'  => 'js/libs/jquery.cookie.js',
             'Bootstrap'      => 'js/libs/bootstrap.min.js',
+            'redbook' => 'js/redbook.js',
             'App_global'     => 'js/global.js',
             'App_navigation' => 'js/navigation.js',
             'App_stuff'      => 'js/main.js',
