@@ -60,10 +60,7 @@ class Index_Module extends Modules {
         $this->data['databases'] = $DB->getDatabaseNames();
 
         // Retrieve active database
-        $activeDatabase = $DB->getActiveDatabase();
-
-        // Map its schema
-        $this->data['Objects'] = $activeDatabase->mapRedisSchema();
+        $this->data['Object'] = $DB->getActiveDatabase();
 
         parent::rawContainer( MODULE . 'index', $this->data );
     }

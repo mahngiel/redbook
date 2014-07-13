@@ -50,9 +50,7 @@ class RedbookDatabaseController extends RedbookBaseController {
             return Redirect::route( 'redbook' );
         }
 
-        $RedisReader = new RedisReader( $databaseName );
-
-        $this->data['Objects'] = mapRedisSchema( $RedisReader->findAllStoresForDatabase(), \Config::get( 'redbook::redbook.schemaSeparator' ) );
+        $this->data['Object'] = new RedisReader( $databaseName );
 
         return View::make( MODULE . 'schema', $this->data );
     }
