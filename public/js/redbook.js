@@ -61,17 +61,17 @@ Array.prototype.diff = function ( a ) {
 
         /** Revert DOM to default */
         if ( term == '' ) {
-            $( '.poke' ).removeClass( 'poke' ).removeClass( 'boob' ).removeClass( 'tube' );
+            $( '.filterItemOut' ).removeClass( 'filterItemOut' ).removeClass( 'filterContainerOut' ).removeClass( 'filterParentOut' );
             return false
         }
 
         /** Remove tree item visibility from dom */
         $.each( schema.diff( searchResults ), function ( k, v ) {
-            $( '*[data-namespace="' + v + '"]' ).addClass( 'poke' ).removeClass( 'boob' ).removeClass( 'tube' );
+            $( '*[data-namespace="' + v + '"]' ).addClass( 'filterItemOut' ).removeClass( 'filterContainerOut' ).removeClass( 'filterParentOut' );
         } );
 
         $.each( searchResults, function ( k, v ) {
-            $( '*[data-namespace="' + v + '"]' ).removeClass( 'poke' ).parents( '.schema-container' ).addClass( 'boob' ).attr( 'style', '' ).parents( '.schema-namespace' ).addClass( 'tube' ).attr( 'style', '' );
+            $( '*[data-namespace="' + v + '"]' ).removeClass( 'filterItemOut' ).parents( '.schema-container' ).addClass( 'filterContainerOut' ).attr( 'style', '' ).parents( '.schema-namespace' ).addClass( 'filterParentOut' ).attr( 'style', '' );
         } );
     };
 
