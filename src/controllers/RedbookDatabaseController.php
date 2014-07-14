@@ -36,6 +36,28 @@ class RedbookDatabaseController extends RedbookBaseController {
         $this->layout->content = \View::make( PACKAGE . '.database', $this->data );
     }
 
+    public function indexes()
+    {
+        $databases = array();
+
+        try
+        {
+            $DB                      = new \Mahngiel\Redbook\DatabaseManager();
+            $databases = array_map( function ( $database )
+            {
+                return array(
+                    'name'   => $database,
+                    'active' => ( \Session::get( 'activeDatabase' ) === $database ? 1 : 0 )
+                );
+            }, $DB->getDatabaseNames() );
+        }
+        catch ( \Exception $exception )
+        {
+        }
+
+        return Response::json( $databases );
+    }
+
     /**
      * @param $databaseName
      *

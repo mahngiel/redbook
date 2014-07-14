@@ -517,3 +517,34 @@ $( d ).on( 'input change', 'input#schemaSearch', function () {
         this.lastValue = this.value;
     }
 } );
+
+/**
+ * Database
+ */
+(function(){
+    var app = angular.module('redbook', []);
+
+    /** Database controller **/
+    app.controller('DatabaseController', ['$http', function($http){
+        var databases = this;
+        databases.available = [];
+
+        // retrieve database listing
+        $http.get( Redbook.baseUrl + 'databases' ).success(function(data) {
+            databases.available = data;
+        });
+    }]);
+
+    /** Schema controller **/
+    app.controller( 'SchemaController', ['$http', function ( $http ) {
+        var schema = this;
+        schema.available = [];
+
+        // retrieve schema tree
+        $http.get( Redbook.baseUrl + 'databases' ).success( function ( data ) {
+            schema.available = data;
+        } );
+    }] );
+
+
+})();
