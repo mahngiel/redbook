@@ -6,12 +6,12 @@
 // ---------------------------------- FUNCTION REGISTRATION ------------------------------------------ //
 
 /* Notification creator */
-function createNotification( level, text ) {
-    var notice = $( '#redbook-notifications' ), message = $( '<div class="notice ' + level + '">' + text + '</div>' );
-
-    notice.append( message );
-    message.delay( 3000 ).animate( { height: 'toggle', opacity: 'toggle' }, 'slow', function () { $( this ).remove(); } );
-}
+//function createNotification( level, text ) {
+//    var notice = $( '#redbook-notifications' ), message = $( '<div class="notice ' + level + '">' + text + '</div>' );
+//
+//    notice.append( message );
+//    message.delay( 3000 ).animate( { height: 'toggle', opacity: 'toggle' }, 'slow', function () { $( this ).remove(); } );
+//}
 
 /**
  * Notification remover
