@@ -27,16 +27,29 @@
 
             <div class="pure-u-2-5 pure-u-md-1-3">
                 <div class="pure-g">
-                    <div id="redbook-nav" class="pure-u-1" ng-controller="DatabaseController as DbCtrl">
-                        <div class="nav-inner">
+                    <div id="redbook-nav" class="pure-u-1">
+
+                        <div class="nav-inner" ng-controller="DatabaseController as DbCtrl">
                             <div class="pure-menu pure-menu-open">
                                 <ul id="redbook-databases">
-                                    <li class="pure-menu-heading">Databases</li>
+                                    <li class="pure-menu-heading"> Databases</li>
                                     <li ng-repeat="database in DbCtrl.available" ng-class="{ active:database.active === 1 }">
-                                        <a class="changeSchema" href="<?php echo REDBOOK_URI; ?>databases/@{{ database.name }}">
+                                        <a class="changeSchema" ng-href="<?php echo REDBOOK_URI; ?>databases/@{{ database.name }}">
                                             <i class="fa fa-database fa-fw"></i>
                                             @{{ database.name }}
                                         </a>
+                                    </li>
+                                    <li>&nbsp;</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="nav-inner">
+                            <div class="pure-menu pure-menu-open">
+                                <ul id="redbook-databases">
+                                    <li class="pure-menu-heading">Configs</li>
+                                    <li class="">
+                                        <a href="<?php echo REDBOOK_URI; ?>config/global" class="ajaxLink">Global</a>
                                     </li>
                                 </ul>
                             </div>

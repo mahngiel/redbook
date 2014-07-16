@@ -1,12 +1,14 @@
 <?php
+
+defined( "REDBOOK_URI" ) or define( "REDBOOK_URI", \Config::get( 'redbook::redbook.routeIndex', null ) . '/' );
 /*
 |--------------------------------------------------------------------------
 | Redbook Routes
 |--------------------------------------------------------------------------
 */
-defined("REDBOOK_URI") or define( "REDBOOK_URI", \Config::get('redbook::redbook.routeIndex', null) . '/' );
 
-//Route::get( REDBOOK_URI ,                           array( 'uses' => 'RedbookRootController@index', 'as' => 'redbookHome' ));
+Route::get  ( REDBOOK_URI.'config/global',            'RedbookRootController@config'        );
+Route::post ( REDBOOK_URI.'config/global',            'RedbookRootController@configUpdate'  );
 
 /*
 |--------------------------------------------------------------------------

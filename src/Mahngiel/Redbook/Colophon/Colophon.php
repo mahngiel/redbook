@@ -1,5 +1,6 @@
 <?php namespace Mahngiel\Redbook\Colophon;
 
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 /**
@@ -311,39 +312,46 @@ class Colophon {
 
     /**
      * Writes the config file
+     *
+     * @throws FileNotFoundException
+     * @throws FileException
      */
-    public function generate_config()
+    public function generateConfig( $configName, $configData )
     {
-        if (!\File::isWritable( $this->configFile ))
+        $configPath = app_path( "config/packages/redbook/{$configName}" );
+
+        if (!\File::exists( $configPath ))
         {
-            if (!chmod( $this->configFile, 0775 ))
-            {
-                throw new FileException( 'The configuration file is not writable!' );
-            }
+            throw new FileNotFoundException( null, 500, null, $configPath );
         }
 
-        $Provider = new SettingProvider();
+        if (!\File::isWritable( $configPath ))
+        {
+            throw new FileException( sprintf( "%s is not writable - please check permissions", $configPath ) );
+        }
 
+        // recreate laravel config template
         $config   = array();
         $config[] = "<?php \n\n return array( \n";
-        $config[] = "\t'version' => '" . self::cms_version . "', ";
-        $config[] = "\t'app_name' => '" . self::app_name . "', ";
 
-        foreach ($Provider->whereSetting( 'in_config', '=', true, array( 'slug', 'value' ) ) as $Setting)
+        // iterate through passed data
+        foreach ($configData as $key => $value)
         {
-            // Force boolean
-            if ($Setting->value == '0' || $Setting->value == '1')
+            // force booleans
+            if ($value === '0' || $value === '1')
             {
-                $config[] = "\t'{$Setting->slug}' => " . ( $Setting->value === '1' ? 1 : 0 ) . ", ";
+                // writing out the words "true" or "false" isn't going to get us anywhere, use 0 & 1
+                $config[] = "\t'{$key}' => " . $value === '1' ? 1 : 0 . ", ";
             }
+            // strings
             else
             {
-                $config[] = "\t'{$Setting->slug}' => '{$Setting->value}', ";
+                $config[] = "\t'{$key}' => '{$value}', ";
             }
         }
 
         $config[] = "); ";
 
-        \File::put( $this->configFile, implode( "\n", $config ) );
+        \File::put( $configPath, implode( "\n", $config ) );
     }
 }
