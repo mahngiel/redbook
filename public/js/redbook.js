@@ -119,7 +119,13 @@ Array.prototype.diff = function ( a ) {
     }
 
     /* ----------------------------------- NAVIGATION ------------------------------------------ */
-    var schemaChangeTarget = '#redbook-schema', databaseListContainer = '#redbook-databases', schemaTreeItem = '.schema-key', pageWait = $( '<div id="wait"><img src="' + Redbook.assetUrl + 'img/preloader.gif" /></div>' ), navRoot = $( '#page' ), navTarget = $( '#page' ), navLink = null;
+    var schemaChangeTarget = '#redbook-schema',
+        databaseListContainer = '#redbook-databases',
+        schemaTreeItem = '.schema-key',
+        pageWait = $( '<div id="wait"><img src="' + Redbook.assetUrl + 'img/preloader.gif" /></div>' ),
+        navRoot = $( '#page' ),
+        navTarget = $( '#page' ),
+        navLink = null;
 
     $( d ).ajaxStart( function () { navTarget.prepend( pageWait ); } );
     $( d ).ajaxError( function () { pageWait.remove(); } );
@@ -161,6 +167,8 @@ Array.prototype.diff = function ( a ) {
         navRoot.prepend( pageWait );
 
         navLink = $( this );
+
+        navTarget = $('#'+$(this ).attr('target'));
 
         navTarget.load( navLink.prop( 'href' ) );
 
@@ -220,7 +228,7 @@ Array.prototype.diff = function ( a ) {
             complete  : function () {
             },
             success   : function ( json ) {
-                createNotification( json.level, json.message );
+                Redbook.createNotification( json.level, json.message );
                 if ( !json.status ) {
                     if ( json.validation ) {
                         $.each( json.validation, function ( index, item ) {
@@ -229,9 +237,9 @@ Array.prototype.diff = function ( a ) {
                     }
                 }
                 else {
-                    navTarget.load( json.redirect );
-                    history.pushState( null, null, json.redirect );
                 }
+                navTarget.load( json.redirect );
+                history.pushState( null, null, json.redirect );
             }
         } );
 
@@ -522,29 +530,12 @@ $( d ).on( 'input change', 'input#schemaSearch', function () {
  * Database
  */
 (function(){
-    var app = angular.module('redbook', []);
+    var app = angular.module('redbook', ['dbController', 'schemaController', 'dbService', 'redisService']);
 
-    /** Database controller **/
-    app.controller('DatabaseController', ['$http', function($http){
-        var databases = this;
-        databases.available = [];
-
-        // retrieve database listing
-        $http.get( Redbook.baseUrl + 'databases' ).success(function(data) {
-            databases.available = data;
-        });
-    }]);
-
-    /** Schema controller **/
-    app.controller( 'SchemaController', ['$http', function ( $http ) {
-        var schema = this;
-        schema.available = [];
-
-        // retrieve schema tree
-        $http.get( Redbook.baseUrl + 'databases' ).success( function ( data ) {
-            schema.available = data;
-        } );
-    }] );
-
-
+    app.filter( 'trustedHtml', function ( $sce ) {
+        return function ( val ) {
+            return $sce.trustAsHtml( val );
+        }
+    } )
 })();
+

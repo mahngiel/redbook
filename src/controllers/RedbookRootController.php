@@ -13,11 +13,21 @@ class RedbookRootController extends RedbookBaseController {
     }
 
     /**
-     * Display a listing of the resource.
+     * Display active database summary
      *
      * @return Response
      */
     public function index()
+    {
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function indexes()
     {
         $this->layout->content = \View::make( PACKAGE . '.index', $this->data );
     }

@@ -141,6 +141,8 @@ class Colophon {
         $this->headScripts = array(
             'modernizr' => 'js/libs/modernizr.min.js',
             'angular'   => '//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js',
+            'ng_dbCtrl' => 'js/controllers/dbController.js',
+            'ng_dbSvc'  => 'js/services/databaseService.js'
         );
     }
 

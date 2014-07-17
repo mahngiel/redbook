@@ -3,23 +3,23 @@
 </div>
 
 <div id="definition">
-    @if( isset($Database) )
-        @foreach( $Database as $Key => $Values )
+    <?php if( isset($Database) ): ?>
+        <?php foreach( $Database as $Key => $Values ): ?>
             <table class="pure-table pure-table-bordered">
                 <thead>
                     <tr>
-                        <td colspan="2" class="aleft bold">{{ $Key }}</td>
+                        <td colspan="2" class="aleft bold"><?php echo $Key;?></td>
                     </tr>
                 </thead>
-                @foreach( $Values as $k => $v )
+                <?php foreach( $Values as $k => $v ): ?>
                     <tr>
-                        <td>{{ deslug($k, '_') }}</td>
-                        <td>{{ !is_array($v) ? $v : json_encode($v) }}</td>
+                        <td><?php echo deslug($k, '_');?></td>
+                        <td><?php echo !is_array($v) ? $v : json_encode($v);?></td>
                     </tr>
-                @endforeach
+                <?php endforeach; ?>
             </table>
-        @endforeach
-    @else
-        <p>{{ $Alert }}</p>
-    @endif
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p><?php echo $Alert;?></p>
+    <?php endif; ?>
 </div>

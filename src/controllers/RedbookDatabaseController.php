@@ -18,31 +18,17 @@ class RedbookDatabaseController extends RedbookBaseController {
     }
 
     /**
-     * Display a listing of the resource.
+     * Show active database summary
      *
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
-    {
-        try
-        {
-            $this->data['Database'] = $this->_Provider->getDatabaseInformation();
-        }
-        catch ( \Predis\Connection\ConnectionException $e )
-        {
-            $this->data['Alert'] = $e->getMessage();
-        }
-
-        $this->layout->content = \View::make( PACKAGE . '.database', $this->data );
-    }
-
-    public function indexes()
     {
         $databases = array();
 
         try
         {
-            $DB                      = new \Mahngiel\Redbook\DatabaseManager();
+            $DB        = new \Mahngiel\Redbook\DatabaseManager();
             $databases = array_map( function ( $database )
             {
                 return array(
@@ -59,22 +45,94 @@ class RedbookDatabaseController extends RedbookBaseController {
     }
 
     /**
+     * Create database record
+     *
+     * @return \Illuminate\View\View
+     */
+    public function create()
+    {
+        $View = \View::make( PACKAGE . 'config.create', $this->data );
+        if( \Request::ajax() )
+        {
+            return $View;
+        }
+        else
+        {
+            return $this->layout->content = $View;
+        }
+    }
+
+    /**
      * @param $databaseName
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function activate( $databaseName )
+    public function show( $databaseName )
     {
         \Session::put( 'activeDatabase', $databaseName );
 
-        if (!\Request::ajax())
-        {
-            return Redirect::route( 'redbook' );
-        }
+        //if (!\Request::ajax()) { return Redirect::route( 'redbook' ); }
 
         $this->data['Object'] = new RedisReader( $databaseName );
 
         return View::make( MODULE . 'schema', $this->data );
+    }
+
+    /**
+     * Store database configuration
+     */
+    public function store()
+    {
+        // validate parameters
+        $database = array(
+            Input::get( 'name' ) => array(
+                'host'     => Input::get( 'host' ),
+                'port'     => Input::get( 'port' ),
+                'password' => Input::get( 'password', '' ),
+                'database' => Input::get( 'database' )
+            )
+        );
+
+        // attempt to connect to database
+        $Redis = new \Illuminate\Redis\Database( $database );
+        $test = $Redis->connection(Input::get('name'));
+
+        try {
+            $test->info();
+        }
+        catch ( \Predis\Connection\ConnectionException $exception )
+        {
+            \Session::flash('error', sprintf("Unable to connect to database. \n Received error %s. \n\n Save configuration anyway?", $exception->getMessage() ));
+
+            $this->response['redirect'] = \URL::to( REDBOOK_URI . 'databases/create');
+
+            return \Response::json($this->response);
+        }
+
+        // confirm for failure
+
+        // write to file
+
+        debug( Input::all() );
+    }
+
+    /**
+     * Display active database summary
+     *
+     * @return Response
+     */
+    public function state()
+    {
+        try
+        {
+            $this->data['Database'] = $this->_Provider->getDatabaseInformation();
+        }
+        catch ( \Predis\Connection\ConnectionException $e )
+        {
+            $this->data['Alert'] = $e->getMessage();
+        }
+
+        return \View::make( PACKAGE . '.database', $this->data );
     }
 
     /**
