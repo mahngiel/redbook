@@ -71,7 +71,7 @@
                 <div class="pure-g">
 
                     <div class="pure-u-1">
-                        <div id="page" ng-controller="SchemaController as schemaCtrl" ng-bind-html="activeDatabaseState | trustedHtml"></div>
+                        <div id="page" ng-bind-html="pageContent | trustedHtml"></div>
                     </div>
 
                     <div class="pure-u-1">

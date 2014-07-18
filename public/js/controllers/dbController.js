@@ -5,7 +5,7 @@
  * Time: 11:50 PM
  */
 
-angular.module( 'dbController', [] ).controller( 'DatabaseController', function ( $scope, $http, Database ) {
+angular.module( 'dbController', [] ).controller( 'DatabaseController', function ( $scope, $http, Database, Redis ) {
     $scope.databaseConfigs = {};
     $scope.databases = [];
     $scope.loading = true;
@@ -25,6 +25,14 @@ angular.module( 'dbController', [] ).controller( 'DatabaseController', function 
                 // retrieve db schema
                 Database.view( v.name ).success(function ( data ) {
                     $scope.activeDatabaseSchema = data;
+
+                    // retrieve database status
+                    Redis.status().success(function ( data ) {
+                        $scope.activeDatabaseState = data;
+                    } ).error( function ( data ) {
+                        console.log( 'error: ' + data );
+                    } );
+
                 } ).error( function ( data ) {
                     console.log( data );
                 } );
