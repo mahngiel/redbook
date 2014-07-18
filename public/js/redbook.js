@@ -74,8 +74,6 @@ Array.prototype.diff = function ( a ) {
         } );
     };
 
-    mapAvailableSchema();
-
     //Private Methods
     /**
      *
@@ -107,7 +105,7 @@ Array.prototype.diff = function ( a ) {
         return values;
     }
 
-    function mapAvailableSchema() {
+    Redbook.mapAvailableSchema = function() {
         if ( $( '.tree-root' ).length ) {
             schema = [];
 
@@ -141,7 +139,7 @@ Array.prototype.diff = function ( a ) {
         navTarget.prepend( pageWait );
         navLink = $( this );
         navLink.closest( 'li' ).addClass( 'active' );
-        navTarget.load( navLink.prop( 'href' ), function () {mapAvailableSchema();} );
+        navTarget.load( navLink.prop( 'href' ), function () { Redbook.mapAvailableSchema();} );
         history.pushState( null, null, navLink.prop( 'href' ) );
     } );
 

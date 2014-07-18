@@ -62,7 +62,7 @@
                         </div>
                     </div>
 
-                    <div id="redbook-schema" class="pure-u-1" ng-bind-html="@{{activeDatabaseSchema}}"></div>
+                    <div id="redbook-schema" class="pure-u-1" ng-bind-html=" activeDatabaseSchema | trustedHtml"></div>
                 </div>
             </div>
 
@@ -71,7 +71,7 @@
                 <div class="pure-g">
 
                     <div class="pure-u-1">
-                        <div id="page" ng-model="content" ng-controller="SchemaController as schemaCtrl" ng-bind-html="activeDatabaseState | trustedHtml"></div>
+                        <div id="page" ng-controller="SchemaController as schemaCtrl" ng-bind-html="activeDatabaseState | trustedHtml"></div>
                     </div>
 
                     <div class="pure-u-1">

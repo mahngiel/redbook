@@ -8,8 +8,8 @@
 angular.module( 'dbController', [] ).controller( 'DatabaseController', function ( $scope, $http, Database ) {
     $scope.databaseConfigs = {};
     $scope.databases = [];
-
     $scope.loading = true;
+    $scope.activeDatabaseSchema = '';
 
     // Get all dbs
     Database.get().success( function ( data ) {
@@ -23,8 +23,8 @@ angular.module( 'dbController', [] ).controller( 'DatabaseController', function 
                 $scope.activeDatabase = v.name;
 
                 // retrieve db schema
-                $scope.activeDatabaseSchema = Database.view( v.name ).success( function ( data ) {
-                    //                        console.log( data );
+                Database.view( v.name ).success(function ( data ) {
+                    $scope.activeDatabaseSchema = data;
                 } ).error( function ( data ) {
                     console.log( data );
                 } );
@@ -33,12 +33,14 @@ angular.module( 'dbController', [] ).controller( 'DatabaseController', function 
                 return;
             }
         } );
+
+        Redbook.mapAvailableSchema();
     } );
 
     $scope.submitDatabaseConfig = function () {
         $scope.loading = true;
 
-        Database.save( $scope.databaseConfig ).success( function ( database ) {
+        Database.save( $scope.databaseConfig ).success(function ( database ) {
             Database.get().success( function ( data ) {
                 $scope.databases = data;
                 $scope.loading = false;
@@ -51,7 +53,7 @@ angular.module( 'dbController', [] ).controller( 'DatabaseController', function 
     $scope.deleteDatabaseConfig = function ( databaseName ) {
         $scope.loading = true;
 
-        Database.destroy( databaseName ).success( function ( data ) {
+        Database.destroy( databaseName ).success(function ( data ) {
             $scope.databases = data;
             $scope.loading = false;
         } ).error( function ( data ) {
@@ -62,10 +64,10 @@ angular.module( 'dbController', [] ).controller( 'DatabaseController', function 
 
 angular.module( 'schemaController', [] ).controller( 'SchemaController', function ( $scope, $http, Database, Redis ) {
 
-    Redis.status().success( function ( data ) {
-            $scope.activeDatabaseState = data;
-        } ).error( function ( data ) {
-            console.log( 'error: ' + data );
-        } );
+    Redis.status().success(function ( data ) {
+        $scope.activeDatabaseState = data;
+    } ).error( function ( data ) {
+        console.log( 'error: ' + data );
+    } );
 } );
 
