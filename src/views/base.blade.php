@@ -66,7 +66,7 @@
                 </div>
             </div>
 
-            <div id="redbook-main" class="pure-u-3-5 pure-u-md-2-3">
+            <div id="redbook-main" class="pure-u-3-5 pure-u-md-2-3 small-6 medium-9 large-9 columns">
 
                 <div class="pure-g">
 
@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="pure-u-1">
-                        <?php echo Modules::getModule( 'console' ); ?>
+                        <?php /*echo Modules::getModule( 'console' );*/ ?>
                     </div>
 
                 </div>
