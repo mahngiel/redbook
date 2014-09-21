@@ -6,13 +6,14 @@
 @import "font-awesome";
 //// Standard Vars
 @import "default";
-// Theme framework
-//@import "framework";
 
-//@import "components";
-//
-//
-//// Responsiveness
+// Theme framework
+@import "framework";
+
+@import "components";
+
+
+// Responsiveness
 //@import "screen";
 
 #redbook{
@@ -20,4 +21,16 @@
         width     : 100%;
         max-width : 100%;
     }
+}
+.off-canvas-wrap, .inner-wrap{
+    height : 100%;
+}
+#redbookBody{
+    height : 100%;
+}
+.move-left>.inner-wrap{
+    transform: translate3d(-70%, 0, 0);
+}
+.right-off-canvas-menu{
+    width: 70%;
 }
