@@ -17,7 +17,7 @@
         <?php echo Colophon::getStylesheets(); ?>
     </head>
     <body>
-
+        <div id="redbookBody">
             <div class="off-canvas-wrap" data-offcanvas>
                 <div class="inner-wrap">
                     <nav class="tab-bar">
@@ -76,25 +76,41 @@
 
                     <section class="main-section">
 
-                        <div id="redbook" class="row">
-                            <div class="columns large-4">
-                                <div class="row">
-                                    <div id="redbook-nav"  class="columns large-5">dbs</div>
-                                    <div id="redbook-schema" class="columns large-7">schema</div>
-                                </div>
-                            </div>
-                            <div id="redbook-main" class="columns large-8"> body </div>
+                        <!-- Databases -->
+                        <div id="redbook-nav"       class="columns large-2 medium-2" ng-controller="DatabaseController as dbCtrl">
+                            <ul class="side-nav">
+                                <li>Databases</li>
+                                <li ng-show="loading"><i class="fa fa-spinner fa-spin"></i>loading</li>
+                                <li ng-repeat="database in databases" ng-class="{ active:database.active === 1 }" ng-hide="loading">
+                                    <a class="changeSchema" ng-href="<?php echo REDBOOK_URI; ?>databases/@{{ database.name }}">
+                                        <i class="fa fa-database fa-fw"></i>
+                                        @{{ database.name }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-href="<?php echo REDBOOK_URI; ?>databases/create" ng-click="content = 3">
+                                        <i class="fa fa-plus-square"></i> create
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
+
+                        {{-- Schemae --}}
+                        <div id="redbook-schema"    class="columns large-4 medium-3 small-5" ng-controller="DatabaseController as dbCtrl" ng-bind-html=" activeDatabaseSchema | trustedHtml"> </div>
+
+                        {{-- Body --}}
+                        <div id="redbook-main"      class="columns large-6 medium-7 small-7" ng-bind-html="pageContent | trustedHtml"></div>
 
                     </section>
 
                     <a class="exit-off-canvas"></a>
                 </div>
             </div>
+        </div>
 
         @section('footer_scripts')
             <?php echo Colophon::getFooterScripts(); ?>
-            <script>$(document).foundation(); $('.left-off-canvas-toggle').click(function(){ console.log('clickered'); });</script>
+            <script>$(document).foundation();</script>
         @show
     </body>
 </html>
