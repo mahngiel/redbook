@@ -144,10 +144,10 @@ class Colophon {
             'jQuery'     => 'js/libs/jquery.js',
             //            'fastClick'  => '//cdnjs.cloudflare.com/ajax/libs/fastclick/0.6.7/fastclick.min.js',
             'fastClick'  => 'js/libs/fastclick.js',
-            //            'angular'    => '//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js',
+            'angular'    => '//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js',
             'foundation' => 'js/libs/foundation.min.js',
-            //            'ng_dbCtrl'  => 'js/controllers/dbController.js',
-            //            'ng_dbSvc'   => 'js/services/databaseService.js',
+            'ng_dbCtrl'  => 'js/controllers/dbController.js',
+            'ng_dbSvc'   => 'js/services/databaseService.js',
         );
     }
 
@@ -157,12 +157,12 @@ class Colophon {
     private function defaultFooterScripts()
     {
         $this->footerScripts = array(
-            //            'jQuery_cookie' => 'js/libs/jquery.cookie.js',
-            //            'Bootstrap'      => 'js/libs/bootstrap.min.js',
-            //            'redbook'       => 'js/redbook.js',
-            //            'App_global'    => 'js/global.js',
-            //            'App_navigation' => 'js/navigation.js',
-            //            'App_stuff'     => 'js/main.js',
+            'jQuery_cookie'  => 'js/libs/jquery.cookie.js',
+            //                        'Bootstrap'      => 'js/libs/bootstrap.min.js',
+            'redbook'        => 'js/redbook.js',
+            'App_global'     => 'js/global.js',
+            'App_navigation' => 'js/navigation.js',
+            'App_stuff'      => 'js/main.js',
         );
     }
 
