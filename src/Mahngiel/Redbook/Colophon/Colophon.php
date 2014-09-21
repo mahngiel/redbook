@@ -18,7 +18,7 @@ class Colophon {
     /**
      * Application Name
      */
-    const app_name = "Redbook: A Redis<sup>&reg;</sup> Schema Visualizer";
+    const app_name = "Redbook: A Redis Schema Visualizer";
 
     /**
      * Environment's config file
@@ -139,13 +139,15 @@ class Colophon {
     private function defaultHeadScripts()
     {
         $this->headScripts = array(
-            'modernizr' => 'js/libs/modernizr.min.js',
-            'jQuery'    => '//code.jquery.com/jquery-2.1.1.min.js',
-            'fastClick' => 'js/libs/fastclick.js',
-            //            'foundation' => 'js/foundation/foundation.js',
-            'angular'   => '//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js',
-            'ng_dbCtrl' => 'js/controllers/dbController.js',
-            'ng_dbSvc'  => 'js/services/databaseService.js',
+            'modernizr'  => 'js/libs/modernizr.js',
+            //                        'jQuery'     => '//code.jquery.com/jquery-2.1.1.min.js',
+            'jQuery'     => 'js/libs/jquery.js',
+            //            'fastClick'  => '//cdnjs.cloudflare.com/ajax/libs/fastclick/0.6.7/fastclick.min.js',
+            'fastClick'  => 'js/libs/fastclick.js',
+            //            'angular'    => '//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js',
+            'foundation' => 'js/libs/foundation.min.js',
+            //            'ng_dbCtrl'  => 'js/controllers/dbController.js',
+            //            'ng_dbSvc'   => 'js/services/databaseService.js',
         );
     }
 
@@ -155,12 +157,12 @@ class Colophon {
     private function defaultFooterScripts()
     {
         $this->footerScripts = array(
-            'jQuery_cookie'  => 'js/libs/jquery.cookie.js',
-            'Bootstrap'      => 'js/libs/bootstrap.min.js',
-            'redbook'        => 'js/redbook.js',
-            'App_global'     => 'js/global.js',
-//            'App_navigation' => 'js/navigation.js',
-            'App_stuff'      => 'js/main.js',
+            //            'jQuery_cookie' => 'js/libs/jquery.cookie.js',
+            //            'Bootstrap'      => 'js/libs/bootstrap.min.js',
+            //            'redbook'       => 'js/redbook.js',
+            //            'App_global'    => 'js/global.js',
+            //            'App_navigation' => 'js/navigation.js',
+            //            'App_stuff'     => 'js/main.js',
         );
     }
 
@@ -170,12 +172,15 @@ class Colophon {
     private function defaultStylesheets()
     {
         $this->stylesheets = array(
-            'App_Pure'          => array( 'href' => 'css/pure.css' ),
-            'UI_Pure'           => array( 'href' => '//yui.yahooapis.com/pure/0.5.0/pure-min.css' ),
-            'UI_Bootstrap'      => array( 'href' => 'css/bootstrap.min.css' ),
-            'UI_BootstrapTheme' => array( 'href' => 'css/bootstrap-theme.min.css' ),
-            'App_custom'        => array( 'href' => 'css/styles.css' ),
+            'Foundation' => [ 'href' => 'css/foundation.min.css' ],
+            'Normalize'  => [ 'href' => 'css/normalize.css' ],
+            'App_custom' => [ 'href' => 'css/styles.css' ],
             //            'Foundation_CSS' => array('href'=>'css/foundation.css'),
+            //            'Foundation' => [ 'href' => '//cdn.jsdelivr.net/foundation/5.4.3/css/foundation.css' ],
+            //            'UI_BootstrapTheme' => array( 'href' => 'css/bootstrap-theme.min.css' ),
+            //            'UI_Bootstrap'      => array( 'href' => 'css/bootstrap.min.css' ),
+            //            'UI_Pure'           => array( 'href' => '//yui.yahooapis.com/pure/0.5.0/pure-min.css' ),
+            //            'App_Pure'          => array( 'href' => 'css/pure.css' ),
         );
     }
 

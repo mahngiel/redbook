@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="redbook">
+<html lang="en" ng-app="redbook" id="top">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,73 +17,84 @@
         <?php echo Colophon::getStylesheets(); ?>
     </head>
     <body>
-        <div id="redbook-header">
-            <div id="redbook-identity">
-                <a href="<?php echo REDBOOK_URI; ?>"><?php echo Colophon::getAppName(); ?></a>
-            </div>
-        </div>
 
-        <div id="redbook" class="pure-g">
+            <div class="off-canvas-wrap" data-offcanvas>
+                <div class="inner-wrap">
+                    <nav class="tab-bar">
+                        <section class="left-small"> <a class="left-off-canvas-toggle menu-icon"><span></span></a> </section>
+                        <section class="right tab-bar-section"> <h1 class=""><a href="<?php echo REDBOOK_URI; ?>"><?php echo Colophon::getAppName(); ?></a></h1> </section>
+                        <section class="right-small"> <a class="right-off-canvas-toggle menu-icon" ><span></span></a> </section>
+                    </nav>
 
-            <div class="pure-u-2-5 pure-u-md-1-3" ng-controller="DatabaseController as dbCtrl">
-                <div class="pure-g">
-                    <div id="redbook-nav" class="pure-u-1">
-
-                        <div class="nav-inner">
-                            <div class="pure-menu pure-menu-open">
-                                <ul id="redbook-databases">
-                                    <li class="pure-menu-heading"> Databases</li>
-                                    <li ng-show="loading"><i class="fa fa-spinner fa-spin"></i>loading</li>
-                                    <li ng-repeat="database in databases" ng-class="{ active:database.active === 1 }" ng-hide="loading">
-                                        <a class="changeSchema" ng-href="<?php echo REDBOOK_URI; ?>databases/@{{ database.name }}">
-                                            <i class="fa fa-database fa-fw"></i>
-                                            @{{ database.name }}
-                                        </a>
+                    <aside class="left-off-canvas-menu">
+                        <ul class="off-canvas-list">
+                            <li><label>Foundation</label></li>
+                            <li class="has-submenu"><a href="#">The Psychohistorians</a>
+                                <ul class="left-submenu">
+                                    <li class="back"><a href="#">Back</a></li>
+                                    <li><label>Level 1</label></li>
+                                    <li><a href="#">Link 1</a></li>
+                                    <li class="has-submenu"><a href="#">Link 2 w/ submenu</a>
+                                        <ul class="left-submenu">
+                                            <li class="back"><a href="#">Back</a></li>
+                                            <li><label>Level 2</label></li>
+                                            <li><a href="#">...</a></li>
+                                        </ul>
                                     </li>
-                                    <li>
-                                        <a ng-href="<?php echo REDBOOK_URI; ?>databases/create" ng-click="content = 3">
-                                            <i class="fa fa-plus-square"></i> create
-                                        </a>
-                                    </li>
-                                    <li>&nbsp;</li>
+                                    <li><a href="#">...</a></li>
                                 </ul>
+                            </li>
+                            <li><a href="#">The Encyclopedists</a></li>
+                            <li><a href="#">The Mayors</a></li>
+                            <li><a href="#">The Traders</a></li>
+                            <li><a href="#">The Merchant Princes</a></li>
+                        </ul>
+                    </aside>
+
+                    <aside class="right-off-canvas-menu">
+                        <ul class="off-canvas-list">
+                            <li><label>Users</label></li>
+                            <li><a href="#">Hari Seldon</a></li>
+                            <li class="has-submenu"><a href="#">R. Giskard Reventlov</a>
+                                <ul class="right-submenu">
+                                    <li class="back"><a href="#">Back</a></li>
+                                    <li><label>Level 1</label></li>
+                                    <li><a href="#">Link 1</a></li>
+                                    <li class="has-submenu"><a href="#">Link 2 w/ submenu</a>
+                                        <ul class="right-submenu">
+                                            <li class="back"><a href="#">Back</a></li>
+                                            <li><label>Level 2</label></li>
+                                            <li><a href="#">...</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">...</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">...</a></li>
+                        </ul>
+                    </aside>
+
+                    <section class="main-section">
+
+                        <div id="redbook" class="row">
+                            <div class="columns large-4">
+                                <div class="row">
+                                    <div id="redbook-nav"  class="columns large-5">dbs</div>
+                                    <div id="redbook-schema" class="columns large-7">schema</div>
+                                </div>
                             </div>
+                            <div id="redbook-main" class="columns large-8"> body </div>
                         </div>
 
-                        <div class="nav-inner">
-                            <div class="pure-menu pure-menu-open">
-                                <ul id="redbook-databases">
-                                    <li class="pure-menu-heading">Configs</li>
-                                    <li class="">
-                                        <a href="<?php echo REDBOOK_URI; ?>config/global" class="ajaxLink" target="page">Global</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    </section>
 
-                    <div id="redbook-schema" class="pure-u-1" ng-bind-html=" activeDatabaseSchema | trustedHtml"></div>
+                    <a class="exit-off-canvas"></a>
                 </div>
             </div>
 
-            <div id="redbook-main" class="pure-u-3-5 pure-u-md-2-3 small-6 medium-9 large-9 columns">
-
-                <div class="pure-g">
-
-                    <div class="pure-u-1">
-                        <div id="page" ng-bind-html="pageContent | trustedHtml"></div>
-                    </div>
-
-                    <div class="pure-u-1">
-                        <?php /*echo Modules::getModule( 'console' );*/ ?>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
         @section('footer_scripts')
             <?php echo Colophon::getFooterScripts(); ?>
+            <script>$(document).foundation(); $('.left-off-canvas-toggle').click(function(){ console.log('clickered'); });</script>
         @show
     </body>
 </html>
